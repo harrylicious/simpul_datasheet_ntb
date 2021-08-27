@@ -1,6 +1,7 @@
 <?php
 class Dashboard extends CI_Controller{
 	function __construct(){
+		error_reporting(0);
 		parent::__construct();
 		if($this->session->userdata('masuk') !=TRUE){
             $url=base_url('administrator');

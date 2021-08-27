@@ -161,7 +161,7 @@
                             
                             
                             <div class="row">
-                                <div class="col-sm-6">
+                                <div class="col-sm-12">
                                     <div class="form-group">
                                         <label>Level</label>
                                             <select class="form-control" name="level" required>
@@ -172,18 +172,7 @@
                                     </div>
                                 </div>
 
-                                <div class="col-sm-6">
-                                    <div class="form-group">
-                                        <label>Lingkup</label>
-                                            <select class="form-control" name="lingkup" required>
-                                                <option value="<?= $data['lingkup']; ?>"><?= $data['lingkup']; ?></option>
-                                                <option value="Provinsi">Provinsi</option>
-                                                <option value="Kabupaten">Kabupaten</option>
-                                                <option value="Kecamatan">Kecamatan</option>
-                                                <option value="Desa">Desa</option>
-                                            </select>
-                                    </div>
-                                </div>
+                            
                             </div>
 
                             
