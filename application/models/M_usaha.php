@@ -18,6 +18,8 @@ class M_usaha extends CI_Model{
     public $view_skala_pasar ="total_data_skala_pasar";
     public $view_regional ="total_data_kabupaten";
     public $view_sebaran_desa ="data_sebaran_desa";
+    public $view_sebaran_usaha_lengkap_terverifikasi = "daftar_sebaran_usaha_lengkap_terverifikasi";
+    public $view_sebaran_usaha_lengkap_belum_verifikasi = "daftar_sebaran_usaha_lengkap_belum_verifikasi";
     
 
     public $view_total_luas_lahan_semua_komoditas ="data_usaha_total_luas_lahan_semua_komoditas";
@@ -56,7 +58,7 @@ class M_usaha extends CI_Model{
     }
 
     // get all
-    function get_all_verified_desa($desa){
+    function get_all_verified_desa($desa, $id_relawan){ 
         $this->db->order_by($this->id,$this->order);
         $this->db->where("desa", urldecode($desa));
         $this->db->where("is_verified", 1);
@@ -89,10 +91,11 @@ class M_usaha extends CI_Model{
     function get_all_non_verified_kecamatan($kecamatan){
         $this->db->order_by($this->id,$this->order);
         $this->db->where("kecamatan", urldecode($kecamatan));
-        $this->db->where("is_verified", 0);
+        $this->db->where("is_verified", 0); 
         return $this->db->get($this->tabel)->result(); 
 
     }
+    
     
     
     // get all
@@ -164,6 +167,26 @@ class M_usaha extends CI_Model{
     // get all
     function get_all_desa_terdaftar(){
         return $this->db->get($this->view_sebaran_desa); 
+    }
+
+    // get all
+    function get_all_sebaran_usaha_lengkap_terverifikasi(){  
+        $this->db->order_by("kabupaten", "ASC");
+        $this->db->order_by("kecamatan", "ASC");
+        return $this->db->get($this->view_sebaran_usaha_lengkap_terverifikasi); 
+    }
+
+    // get all
+    function get_all_sebaran_usaha_lengkap_belum_terverifikasi(){
+        $this->db->order_by("kabupaten", "ASC");
+        $this->db->order_by("kecamatan", "ASC");
+        return $this->db->get($this->view_sebaran_usaha_lengkap_belum_verifikasi); 
+    }
+
+    // get all
+    function get_data_sebaran_usaha_lengkap_belum_terverifikasi_by_desa($desa){
+        $this->db->where("desa", $desa);
+        return $this->db->get($this->view_sebaran_usaha_lengkap_belum_verifikasi); 
     }
 
     
@@ -294,7 +317,24 @@ class M_usaha extends CI_Model{
     // get all
     function get_target_verifikasi($id){
         $this->db->where($this->kode_user, $id);
-        return $this->db->get($this->tabel_target_verifikasi); 
+        $this->db->where("status", 0);
+        return $this->db->get($this->tabel_target_verifikasi);  
+
+    }
+
+     // get all
+     function get_belum_verifikasi($id){
+        $this->db->where($this->kode_user, $id);
+        $this->db->where("status", 0);
+        return $this->db->get($this->tabel_target_verifikasi);  
+
+    }
+
+    // get all
+    function get_sudah_verifikasi($id){
+        $this->db->where($this->kode_user, $id);
+        $this->db->where("status", 1);
+        return $this->db->get($this->tabel_target_verifikasi);  
 
     }
 
@@ -329,13 +369,7 @@ class M_usaha extends CI_Model{
         return $this->db->get("total_data_usaha"); 
     }
 
-     // get all
-     function get_all_pengelola(){
-        $this->db->order_by($this->id,$this->order);
-        $this->db->where($this->jenis_media, "Video");
-        return $this->db->get($this->view)->result(); 
 
-    }
 
     // get detail 
     function get_detail($id){
@@ -395,6 +429,13 @@ class M_usaha extends CI_Model{
     
     //update data
     function update($id,$data){
+        $this->db->where($this->id,$id);
+        $this->db->update($this->tabel,$data);
+
+    }
+
+    //update data
+    function terverifikasi($id, $data){
         $this->db->where($this->id,$id);
         $this->db->update($this->tabel,$data);
 

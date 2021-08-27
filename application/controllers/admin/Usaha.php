@@ -78,10 +78,11 @@ class Usaha extends CI_Controller{
 		
 		if($this->session->userdata('akses')=='1'){  
 			
-			
+			 
 			$x['data_target_verifikasi']=$this->m_usaha->get_target_verifikasi($idadmin)->result();  
-			$x['data_non_verifikasi']=$this->m_usaha->get_all_non_verified_kecamatan($cek['kecamatan']);  
-			$x['data_verifikasi']=$this->m_usaha->get_all_verified_kecamatan($cek['kecamatan']);  
+			$x['data_belum_verifikasi']=$this->m_usaha->get_all_non_verified_desa($cek['desa'], $idadmin); 
+			$x['data_sudah_verifikasi']=$this->m_usaha->get_all_verified_desa($cek['desa'], $idadmin); 
+			 
 
 			$x['total']=$this->m_usaha->get_total()->row_array();   
 			$x['total_semua']=$this->m_usaha->get_total()->row_array();  
@@ -109,6 +110,77 @@ class Usaha extends CI_Controller{
 		}
 	}
 
+	function terverifikasi($id){   
+		$idadmin = $this->session->userdata('idadmin');
+		$bidang=$this->session->userdata('bidang');
+		$wilayah = $this->session->userdata('wilayah');
+
+		$level = $this->session->userdata('level');
+
+		$data = array(
+			'is_verified' => 1,
+			'id_relawan' => $idadmin
+		);
+
+		$terverifikasi = $this->m_usaha->terverifikasi($id, $data);
+
+		$cek = $this->m_usaha->get_target_verifikasi($idadmin)->row_array();  
+		
+		if($this->session->userdata('akses')=='1'){  
+			
+			 
+			$x['data_target_verifikasi']=$this->m_usaha->get_target_verifikasi($idadmin)->result();  
+			$x['data_belum_verifikasi']=$this->m_usaha->get_all_non_verified_desa($cek['desa'], $idadmin); 
+			$x['data_sudah_verifikasi']=$this->m_usaha->get_all_verified_desa($cek['desa'], $idadmin); 
+			 
+
+			$x['total']=$this->m_usaha->get_total()->row_array();   
+			$x['total_semua']=$this->m_usaha->get_total()->row_array();  
+ 
+			$x['ntb'] = $this->m_usaha->get_all_perkabupaten("Provinsi NTB")->row_array();
+			$x['lotim'] = $this->m_usaha->get_all_perkabupaten("Kabupaten Lombok Timur")->row_array();
+			$x['loteng'] = $this->m_usaha->get_all_perkabupaten("Kabupaten Lombok Tengah")->row_array();
+			$x['lobar'] = $this->m_usaha->get_all_perkabupaten("Kabupaten Lombok Barat")->row_array();
+			$x['lout'] = $this->m_usaha->get_all_perkabupaten("Kabupaten Lombok Utara")->row_array();
+			$x['sumbawa'] = $this->m_usaha->get_all_perkabupaten("Kabupaten Sumbawa")->row_array();
+			$x['sumbar'] = $this->m_usaha->get_all_perkabupaten("Kabupaten Sumbawa Barat")->row_array();
+			$x['bima'] = $this->m_usaha->get_all_perkabupaten("Kabupaten Bima")->row_array();
+			$x['kota_bima'] = $this->m_usaha->get_all_perkabupaten("Kota Bima")->row_array();
+			$x['mataram'] = $this->m_usaha->get_all_perkabupaten("Kota Mataram")->row_array();
+			$x['dompu'] = $this->m_usaha->get_all_perkabupaten("Kabupaten Dompu")->row_array();
+			
+			$x['musnah'] = $this->m_usaha->get_data_perkomoditas("Musnah", $wilayah);  
+			$x['berkas_perorangan'] = $this->m_usaha->get_data_perkomoditas("Berkas Perorangan", $wilayah); 
+			$x['dinilai_kembali'] = $this->m_usaha->get_data_perkomoditas("Dinilai Kembali", $wilayah); 
+			$x['permanen'] = $this->m_usaha->get_data_perkomoditas("Permanen", $wilayah); 
+
+			redirect('admin/v_verifikasi_usaha/'.$desa);
+			
+		}else{
+			redirect('administrator');
+		}
+	}
+
+	function target_verifikasi($id){  
+		$idadmin = $this->session->userdata('idadmin');
+		$bidang=$this->session->userdata('bidang');
+		$wilayah = $this->session->userdata('wilayah');
+
+		$level = $this->session->userdata('level');
+		
+		if($this->session->userdata('akses')=='1'){  
+			
+			
+			$x['data_profil'] = $this->m_user->get_detail($id)->row_array(); 
+			$x['data_sebaran_usaha']=$this->m_usaha->get_all_sebaran_usaha_lengkap_belum_terverifikasi()->result();
+			$x['data_target_verifikasi']=$this->m_usaha->get_target_verifikasi($id)->result();
+			
+			$this->load->view('admin/v_target_verifikasi',$x);
+		}else{
+			redirect('administrator');
+		}
+	}
+
 	function get_data_usaha_target_verifikasi($desa){  
 		$idadmin = $this->session->userdata('idadmin');
 		$bidang=$this->session->userdata('bidang');
@@ -118,11 +190,14 @@ class Usaha extends CI_Controller{
 
 		
 		if($this->session->userdata('akses')=='1'){  
-			
+			 
 			
 			$x['data_target_verifikasi']=$this->m_usaha->get_target_verifikasi($idadmin)->result();  
 			$x['data_non_verifikasi']=$this->m_usaha->get_all_non_verified_desa($desa);  
-			$x['data_verifikasi']=$this->m_usaha->get_all_verified_desa($desa);  
+			$x['data_verifikasi']=$this->m_usaha->get_all_verified_desa($desa, $idadmin); 
+			
+			$x['data_belum_verifikasi']=$this->m_usaha->get_all_non_verified_desa($desa, $idadmin); 
+			$x['data_sudah_verifikasi']=$this->m_usaha->get_all_verified_desa($desa, $idadmin);  
 
 			$x['total']=$this->m_usaha->get_total()->row_array();   
 			$x['total_semua']=$this->m_usaha->get_total()->row_array();  
@@ -140,7 +215,7 @@ class Usaha extends CI_Controller{
 			$x['dompu'] = $this->m_usaha->get_all_perkabupaten("Kabupaten Dompu")->row_array();
 			
 			
-			$this->load->view('admin/v_verifikasi_usaha',$x);
+			$this->load->view('admin/v_verifikasi_usaha',$x); 
 		}else{
 			redirect('administrator');
 		}
@@ -500,6 +575,13 @@ function delete_data($id){
 		redirect('admin/usaha');
 }
 
+
+function delete_data_verifikasi($id){
+	
+	$this->m_usaha->delete($id);
+	   echo $this->session->set_flashdata('msg','success-hapus');
+	   redirect('admin/usaha/verifikasi');
+}
 
 
 

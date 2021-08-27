@@ -31,7 +31,7 @@ tfoot input {
         <h1>
             Data Pengguna
                 <?php 
-                if ($_SESSION['level'] == "superadmin") {
+                if ($_SESSION['level'] != "relawan") {
                 ?>
                 <a href="<?= base_url('admin/user/tambah'); ?>" class="btn btn-success">Tambah Pengguna</a>
                 <?php } ?>
@@ -72,8 +72,7 @@ tfoot input {
                     <?php
                     $no = 1; 
                     foreach ($data as $row) : 
-                      if ($_SESSION['level'] != 'superadmin') {
-                        if ($row->level != 'superadmin') {
+                       {
                         ?> 
                         <tr>
                             <td width="20px"><?= $no++; ?></td>
@@ -85,30 +84,13 @@ tfoot input {
                             <td><?= $row->created_at; ?></td>
                             <td>
                               <a href="<?= base_url('admin/user/edit/').$row->kode_user; ?>" class="btn btn-warning">Edit</a>
+                              <a href="<?= base_url('admin/usaha/target_verifikasi/').$row->kode_user; ?>" class="btn btn-info">Atur Target</a>
                             </td>
                         </tr>
 
                         <?php
                         }
-                      }
-                      else {
-                        ?>
-                        <tr>
-                            <td width="20px"><?= $no++; ?></td>
-                            <td><?= $row->nama_lengkap; ?></td>
-                            <td><?= $row->alamat; ?></td>
-                            <td><?= $row->telp; ?></td>
-                            <td><?= $row->username; ?></td>
-                            <td><?= $row->level; ?></td>
-                            <td><?= $row->created_at; ?></td>
-                            <td>
-                              <a href="<?= base_url('admin/user/edit/').$row->kode_user; ?>" class="btn btn-warning">Edit</a>
-                              <a href="<?= base_url('admin/user/delete_data/').$row->kode_user; ?>" class="btn btn-danger">Hapus</a>
-                            </td>
-                        </tr>
-
-                        <?php
-                      }
+                     
                       endforeach;
                       
                     

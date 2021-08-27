@@ -1,8 +1,9 @@
 <?php
-class M_user extends CI_Model{
+class M_target_verifikasi extends CI_Model{
 
-    public $tabel ="users";
-    public $id = "kode_user";
+    public $tabel ="target_verifikasi";
+    public $id = "id";
+    public $kode_user = "kode_user";
     public $kode_admin = "kode_admin";
     public $wilayah = "wilayah";
     public $order ="DESC";

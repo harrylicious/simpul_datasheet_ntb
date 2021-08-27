@@ -34,6 +34,16 @@ error_reporting(0);
             </span>
           </a>
         </li>
+
+        
+        <li>
+          <a href="<?php echo base_url('admin/usaha/tambah/'.$_SESSION['idadmin']); ?>">
+            <i class="fa fa-plus"></i> <span>Tambah</span>
+            <span class="pull-right-container">
+              <small class="label pull-right"></small>
+            </span>
+          </a>
+        </li>
         <?php
 
         if ($_SESSION['level'] == "relawan") {
@@ -65,14 +75,7 @@ error_reporting(0);
 
         if ($_SESSION['level'] == "relawan") {
           ?>
-        <li>
-          <a href="<?php echo base_url('admin/usaha/tambah/'.$_SESSION['idadmin']); ?>">
-            <i class="fa fa-plus"></i> <span>Tambah</span>
-            <span class="pull-right-container">
-              <small class="label pull-right"></small>
-            </span>
-          </a>
-        </li>
+
 
         
         <?php } ?>
@@ -90,6 +93,7 @@ error_reporting(0);
 
         if ($_SESSION['level'] != "relawan") {
           ?>
+          
 
         
         <li>
@@ -101,10 +105,31 @@ error_reporting(0);
           </a>
         </li>
 
+        
+        
+
           <?php
         }
 
         ?>
+        <?php
+
+        if ($_SESSION['level'] == "admin") {
+          ?>
+
+             <li>
+              <a href="<?php echo base_url('admin/user').''?>">
+                <i class="fa fa-user"></i> <span>Target Verifikasi</span>
+                <span class="pull-right-container">
+                  <small class="label pull-right"></small>
+                </span>
+              </a>
+            </li>
+            <?php
+          }
+
+          ?>
+ 
         <li>
           <a href="<?php echo base_url('admin/login/logout');
           ?>">

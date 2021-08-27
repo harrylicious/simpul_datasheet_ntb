@@ -67,7 +67,7 @@ tfoot input {
                         $no = 1;
                         foreach ($data_target_verifikasi as $row) :
                         ?>
-                        <tr>
+                        <tr> 
                             <td><?= $no++; ?></td>
                             <td><?= $row->desa; ?></td>
                             <td><?= $row->kecamatan; ?></td>
@@ -131,7 +131,7 @@ tfoot input {
                     <tbody>
                         <?php
                         $no = 1;
-                        foreach ($data_verifikasi as $row) :
+                        foreach ($data_sudah_verifikasi as $row) :
                         ?>
                         <tr>
                             <td><?= $no++; ?></td>
@@ -150,7 +150,7 @@ tfoot input {
                             <td><?= $row->kapasitas_produksi." ".$row->satuan_produksi."/".$row->periode_produksi; ?></td>
                             <td>
                                 <a href="<?= base_url('admin/usaha/edit/').$row->id; ?>" class="btn btn-warning">Edit</a>
-                                <a href="<?= base_url('admin/usaha/delete_data/').$row->id; ?>" class="btn btn-danger">Hapus</a>
+                                <a href="<?= base_url('admin/usaha/delete_data_verifikasi/').$row->id; ?>" class="btn btn-danger">Hapus</a>
 
                             </td>
                         </tr>
@@ -201,14 +201,14 @@ tfoot input {
                             <th>Komoditas</th>
                             <th>Jml. Karyawan</th> 
                             <th>Kapasitas Produksi</th>
-                            <th width="160px">Aksi</th>
+                            <th width="220px">Aksi</th>
                       </tr>
                   </thead>
                   
                   <tbody>
                     <?php
                     $no = 1;
-                    foreach ($data_non_verifikasi as $row) :
+                    foreach ($data_belum_verifikasi as $row) :
                       ?>
                       <tr>
                         <td><?= $no++; ?></td>
@@ -226,8 +226,9 @@ tfoot input {
                         <td><?= $row->jml_karyawan; ?></td>
                         <td><?= $row->kapasitas_produksi." ".$row->satuan_produksi."/".$row->periode_produksi; ?></td>
                         <td>
+                             <a href="<?= base_url('admin/usaha/terverifikasi/').$row->id; ?>" class="btn btn-success"> <i class="fa fa-apply"></i> Terverifikasi</a>
                              <a href="<?= base_url('admin/usaha/edit/').$row->id; ?>" class="btn btn-warning">Edit</a>
-                              <a href="<?= base_url('admin/usaha/delete_data/').$row->id; ?>" class="btn btn-danger">Hapus</a>
+                              <a href="<?= base_url('admin/usaha/delete_data_verifikasi/').$row->id; ?>" class="btn btn-danger">Hapus</a>
 
                           </td>
                       </tr>
