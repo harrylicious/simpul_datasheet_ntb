@@ -132,7 +132,7 @@
                                     <div class="form-group">
                                         <label>Level</label>
                                             <select class="form-control" name="level" required>
-                                                <option value="">- PILIH -</option>
+                                                <option value="">Relawan</option>
                                                 <option value="admin">Admin</option>
                                                 <option value="relawan">Relawan</option>
                                             </select>
