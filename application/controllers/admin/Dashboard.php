@@ -14,6 +14,7 @@ class Dashboard extends CI_Controller{
 	function index(){
 		$x['visitor'] = $this->m_pengunjung->statistik_pengujung(); 
 		$wilayah = $this->session->userdata('wilayah');
+		$kabupaten = $this->session->userdata('kabupaten');
 		$nama = $this->session->userdata('nama_lengkap'); 
 
 		
@@ -25,8 +26,11 @@ class Dashboard extends CI_Controller{
 			if ($this->session->userdata('level') == "superadmin") {
 				$x['data'] = $this->m_usaha->get_all();  
 			}
-			else if ($this->session->userdata('level') == "admin") {
+			else if ($this->session->userdata('level') == "dinas") {
 				$x['data'] = $this->m_usaha->get_all_perkomoditas("SEMUA");  
+			}
+			else if ($this->session->userdata('level') == "admin") {
+				$x['data'] = $this->m_usaha->get_all_data_usaha_perkabupaten($kabupaten)->result();  
 			}
 			else if ($this->session->userdata('level') == "relawan") {
 				$x['data']=$this->m_usaha->get_all_non_verified_kecamatan($cek['kecamatan']);  
@@ -34,6 +38,7 @@ class Dashboard extends CI_Controller{
 
 			$x['total']=$this->m_usaha->get_total()->row_array();   
 			$x['total_semua']=$this->m_usaha->get_total()->row_array();  
+			$x['total_perkabupaten']=$this->m_usaha->get_total_perkabupaten($kabupaten)->row_array();  
  
 			$x['ntb'] = $this->m_usaha->get_total()->row_array();
 			$x['lotim'] = $this->m_usaha->get_all_perkabupaten("Kabupaten Lombok Timur")->row_array();

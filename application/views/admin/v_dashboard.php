@@ -35,7 +35,7 @@ tfoot input {
             <?php include_once "parsial/summary.php"; ?>    
 
                 <div class="row">  
-            
+             
 
                     <div class="col-md-12"> 
                         <div class="box box-info">
@@ -59,7 +59,7 @@ tfoot input {
                             </div>
                             <div class="box-body">
                                 <div class="table-responsive">
-                                    <?php if ($_SESSION['level'] == "admin") { ?>
+                                    <?php if ($_SESSION['level'] == "dinas") { ?>
 
                                     <table id="dtHorizontalExample" class="display" style="width:100%"> 
                                         <thead>

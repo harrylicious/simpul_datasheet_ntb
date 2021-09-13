@@ -14,7 +14,7 @@ class Usaha extends CI_Controller{
 		$this->load->model('m_usaha');
 		$this->load->model('m_user');
 		$this->load->library('upload'); 
-		$this->load->library('form_validation');
+		$this->load->library('form_validation'); 
 	}
 
 
@@ -22,6 +22,7 @@ class Usaha extends CI_Controller{
 		$idadmin = $this->session->userdata('idadmin');
 		$bidang=$this->session->userdata('bidang');
 		$wilayah = $this->session->userdata('wilayah');
+		$kabupaten = $this->session->userdata('kabupaten');
 		
 		$cek = $this->m_usaha->get_target_verifikasi($idadmin)->row_array();  
 
@@ -31,14 +32,18 @@ class Usaha extends CI_Controller{
 		if($this->session->userdata('akses')=='1'){  
 			
 			if ($this->session->userdata('level') == "superadmin") {
-				$x['data']=$this->m_usaha->get_all();  
+				$x['data'] = $this->m_usaha->get_all();  
+			}
+			else if ($this->session->userdata('level') == "dinas") {
+				$x['data'] = $this->m_usaha->get_all_perkomoditas("SEMUA");  
 			}
 			else if ($this->session->userdata('level') == "admin") {
-				$x['data'] = $this->m_usaha->get_all();  
+				$x['data'] = $this->m_usaha->get_all_data_usaha_perkabupaten($kabupaten)->result();  
 			}
 			else if ($this->session->userdata('level') == "relawan") {
 				$x['data']=$this->m_usaha->get_all_non_verified_kecamatan($cek['kecamatan']);  
 			}
+
 			$x['total']=$this->m_usaha->get_total()->row_array();   
 			$x['total_semua']=$this->m_usaha->get_total()->row_array();  
  

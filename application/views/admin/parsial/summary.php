@@ -8,7 +8,13 @@ if (isset($total)) {
 if (isset($total_semua)) {
     $total_semua = $total_semua['total'];
 } else {
-    $semua = 0;
+    $total_semua = 0;
+}
+
+if (isset($total_perkabupaten)) {
+    $total_perkabupaten = $total_perkabupaten['total'];
+} else {
+    $total_perkabupaten = 0;
 }
 
 if (isset($total_data_inaktif['total'])) {
@@ -89,12 +95,21 @@ if (isset($ntb)) {
             </div>
             <?php
         }
+        else if ($_SESSION['kode_admin'] == "Kabupaten") {
+            ?>
+
+            <div class="inner">
+                    <p>Selamat Datang <b> <?= $_SESSION['nama_lengkap']; ?></b>, Anda saat ini masuk sebagai <b><?= $_SESSION['level']; ?></b> di <b><?= $_SESSION['kabupaten']; ?></b>.</p>
+                    <p>Total Data di <b><?= $_SESSION['kabupaten']; ?></b> adalah <b><?= $total_perkabupaten; ?> </b> dari <b><?= $semua; ?></b>
+                </div>
+            <?php
+        }
         else {
             ?>
 
             <div class="inner">
                     <p>Selamat Datang <b> <?= $_SESSION['nama_lengkap']; ?></b>, Anda saat ini masuk sebagai <b><?= $_SESSION['level']; ?></b>.</p>
-                    <p>Data yang terhimpun di database sebanyak <b><?= $semua; ?></b>
+                    <p>Total Data <b><?= $semua; ?> </b> dan yang terhimpun di Akun Anda 
                 </div>
             <?php
         }

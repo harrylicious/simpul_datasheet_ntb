@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Aug 27, 2021 at 05:21 AM
+-- Generation Time: Sep 13, 2021 at 11:45 PM
 -- Server version: 10.4.17-MariaDB
 -- PHP Version: 8.0.2
 
@@ -5540,12 +5540,12 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`kode_user`, `nama_lengkap`, `alamat`, `desa`, `kecamatan`, `kabupaten`, `email`, `telp`, `username`, `password`, `kode_admin`, `bidang`, `level`, `created_at`, `updated_at`) VALUES
 (58, 'Super Admin', 'NTB', '-', '-', '-', '-', '-', 'admin', '21232f297a57a5a743894a0e4a801fc3', 'Semua', '-', 'superadmin', '2021-05-02 14:01:15', '2021-08-16 11:13:06'),
-(66, 'Dinas Kelautan, Perikanan dan Peternakan', '-', '-', '-', 'Kota Mataram', 'dislutkanak@gmail.com', '-', 'dislutkanak', '650cf97f6f285fcf1e0ae8bdd067390d', 'Provinsi', 'Perikanan', 'admin', '2021-05-31 23:37:36', '2021-05-31 15:37:36'),
-(67, 'Dinas Perindustrian', '-', '-', '-', 'Kota Mataram', 'disper@gmail.com', '-', 'disper', 'ac4acdf2dd40bfd80492a24739cb01c1', 'Provinsi', 'Perindustrian', 'admin', '2021-05-31 23:37:36', '2021-05-31 15:37:36'),
-(68, 'Dinas Perdagangan', '-', '-', '-', 'Kota Mataram', 'disdag@gmail.com', '-', 'disdag', 'a84df236cac91dae592683174b877f66', 'Provinsi', 'Perdagangan', 'admin', '2021-05-31 23:37:36', '2021-05-31 15:37:36'),
-(69, 'Dinas Koperasi dan UMKM', '-', '-', '-', 'Kota Mataram', 'diskop@gmail.com', '-', 'diskop', '86ebcf7f5ece4d2668535292012c30a0', 'Provinsi', 'Koperasi UMKM', 'admin', '2021-05-31 23:37:36', '2021-05-31 15:37:36'),
-(70, 'Dinas Pangan dan Pertanian', '-', '-', '-', 'Kota Mataram', 'dispanper@gmail.com', '-', 'dispanper', 'dca6ef3af8875fd1ba543c7d6fad68b0', 'Provinsi', 'Pertanian', 'admin', '2021-05-31 23:37:36', '2021-05-31 15:37:36'),
-(71, 'Dinas Kehutanan', '-', '-', '-', 'Kota Mataram', 'dishut@gmail.com', '-', 'dishut', 'b0fef69b6fafeb42ba093053fca5933d', 'Provinsi', 'Kehutanan', 'admin', '2021-05-31 23:37:36', '2021-05-31 15:37:36'),
+(66, 'Admin Lotim', '-', '-', '-', 'Kabupaten Lombok Timur', 'lotim@gmail.com', '-', 'lotim', '650cf97f6f285fcf1e0ae8bdd067390d', 'Kabupaten', '-', 'admin', '2021-05-31 23:37:36', '2021-09-13 17:16:22'),
+(67, 'Dinas Perindustrian', '-', '-', '-', 'Kota Mataram', 'disper@gmail.com', '-', 'disper', 'ac4acdf2dd40bfd80492a24739cb01c1', 'Provinsi', 'Perindustrian', 'dinas', '2021-05-31 23:37:36', '2021-09-13 17:24:57'),
+(68, 'Dinas Perdagangan', '-', '-', '-', 'Kota Mataram', 'disdag@gmail.com', '-', 'disdag', 'a84df236cac91dae592683174b877f66', 'Provinsi', 'Perdagangan', 'dinas', '2021-05-31 23:37:36', '2021-09-13 17:24:57'),
+(69, 'Dinas Koperasi dan UMKM', '-', '-', '-', 'Kota Mataram', 'diskop@gmail.com', '-', 'diskop', '86ebcf7f5ece4d2668535292012c30a0', 'Provinsi', 'Koperasi UMKM', 'dinas', '2021-05-31 23:37:36', '2021-09-13 17:24:57'),
+(70, 'Dinas Pangan dan Pertanian', '-', '-', '-', 'Kota Mataram', 'dispanper@gmail.com', '-', 'dispanper', 'dca6ef3af8875fd1ba543c7d6fad68b0', 'Provinsi', 'Pertanian', 'dinas', '2021-05-31 23:37:36', '2021-09-13 17:24:57'),
+(71, 'Dinas Kehutanan', '-', '-', '-', 'Kota Mataram', 'dishut@gmail.com', '-', 'dishut', 'b0fef69b6fafeb42ba093053fca5933d', 'Provinsi', 'Kehutanan', 'dinas', '2021-05-31 23:37:36', '2021-09-13 17:24:57'),
 (72, 'Harry Sunaryo, S.Kom', 'Timba Borok, RT. 11, RW. 03', 'Tanjung', 'Labuhan Haji', 'Kabupaten Lombok Timur', 'harrysunaryo03@gmail.com', '087851922063', 'relawan', '626c9488745bc8691a99fae8f227b6ce', 'disdag', NULL, 'relawan', '2021-05-31 23:37:36', '2021-08-22 15:01:26'),
 (10002, 'Test Saja', 'Selong', 'Test', 'Test', 'Test', 'haha@gmail.com', '0871213121', 'test', '098f6bcd4621d373cade4e832627b4f6', 'disdag', NULL, 'relawan', '2021-08-22 23:14:24', '2021-08-22 15:14:41'),
 (10003, 'Tim Disper', 'Tanjung', 'Tanjung', 'Labuhan Haji', 'Lombok TImur', 'tim@gmail.com', '091211111111', 'tim', 'ac4acdf2dd40bfd80492a24739cb01c1', 'disper', NULL, 'relawan', '2021-08-27 11:06:18', '2021-08-27 03:07:50'),
@@ -5659,7 +5659,11 @@ INSERT INTO `visitors` (`pengunjung_id`, `pengunjung_tanggal`, `pengunjung_ip`, 
 (1017, '2021-08-18 03:25:42', '127.0.0.1', 'Firefox'),
 (1018, '2021-08-19 01:22:11', '127.0.0.1', 'Firefox'),
 (1019, '2021-08-22 14:32:53', '127.0.0.1', 'Firefox'),
-(1020, '2021-08-26 22:36:39', '127.0.0.1', 'Firefox');
+(1020, '2021-08-26 22:36:39', '127.0.0.1', 'Firefox'),
+(1021, '2021-09-07 12:22:26', '127.0.0.1', 'Firefox'),
+(1022, '2021-09-08 01:59:48', '127.0.0.1', 'Firefox'),
+(1023, '2021-09-13 13:46:55', '127.0.0.1', 'Firefox'),
+(1024, '2021-09-13 17:03:37', '127.0.0.1', 'Firefox');
 
 -- --------------------------------------------------------
 
@@ -7410,7 +7414,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `visitors`
 --
 ALTER TABLE `visitors`
-  MODIFY `pengunjung_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1021;
+  MODIFY `pengunjung_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1025;
 
 --
 -- Constraints for dumped tables

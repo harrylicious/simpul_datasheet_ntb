@@ -39,6 +39,7 @@ class M_usaha extends CI_Model{
     public $kode_uk_up = "sektor_usaha";
     public $kode_klasifikasi = "sub_sektor_usaha";
     public $wilayah = "kabupaten";
+    public $kabupaten = "kabupaten";
     public $komoditas = "komoditas";
     public $order ="DESC"; 
 
@@ -103,7 +104,7 @@ class M_usaha extends CI_Model{
         if ($wilayah != "SEMUA") { 
             $this->db->where($this->wilayah, urldecode($wilayah));
         }
-        return $this->db->get($this->view_perkabupaten); 
+        return $this->db->get($this->view_perkabupaten);  
 
     }
 
@@ -367,7 +368,13 @@ class M_usaha extends CI_Model{
    // get all
     function get_total(){
         return $this->db->get("total_data_usaha"); 
-    }
+    } 
+
+    // get all
+    function get_total_perkabupaten($kabupaten){
+        $this->db->where($this->kabupaten, urldecode($kabupaten));
+        return $this->db->get("data_usaha_perkabupaten"); 
+    } 
 
 
 
