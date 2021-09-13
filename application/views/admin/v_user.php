@@ -75,7 +75,7 @@ tfoot input {
                        {
                         ?> 
                         <tr>
-                            <td width="20px"><?= $no++; ?></td>
+                            <td width="20px"><?= $no++; ?></td> 
                             <td><?= $row->nama_lengkap; ?></td>
                             <td><?= $row->alamat; ?></td>
                             <td><?= $row->telp; ?></td>
@@ -84,7 +84,13 @@ tfoot input {
                             <td><?= $row->created_at; ?></td>
                             <td>
                               <a href="<?= base_url('admin/user/edit/').$row->kode_user; ?>" class="btn btn-warning">Edit</a>
+                              <?php if ($row->level == 'relawan') {
+                              ?>
+                              
                               <a href="<?= base_url('admin/usaha/target_verifikasi/').$row->kode_user; ?>" class="btn btn-info">Atur Target</a>
+                              <?php
+                              }
+                              ?>
                             </td>
                         </tr>
 

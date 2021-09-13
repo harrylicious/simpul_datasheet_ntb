@@ -86,7 +86,7 @@ if (isset($ntb)) {
     <div class="col-lg-12">
         <div class="small-box bg-blue">
         <?php 
-        if ($_SESSION['username'] == "superadmin") {
+        if ($_SESSION['level'] == "superadmin") {
             ?>
 
             <div class="inner">
@@ -95,7 +95,7 @@ if (isset($ntb)) {
             </div>
             <?php
         }
-        else if ($_SESSION['kode_admin'] == "Kabupaten") {
+        else if ($_SESSION['level'] == "dinas") {
             ?>
 
             <div class="inner">

@@ -62,14 +62,14 @@
                                 <div class="col-sm-6 ">
                                     <div class="form-group">
                                         <label>Kode User</label>
-                                        <input type="text" class="form-control" id="kode_user" name="kode_user" placeholder="Kode User">
+                                        <input type="text" class="form-control" id="kode_user" name="kode_user" placeholder="Kode User. Misal: 10006">
                                     </div>
                                 </div>
 
                                 <div class="col-sm-6 ">
                                     <div class="form-group">
                                         <label>Nama Lengkap </label>
-                                        <input type="text" class="form-control" id="nama_lengkap" name="nama_lengkap" placeholder="Nama Lengkap" required>
+                                        <input type="text" class="form-control" id="nama_lengkap" name="nama_lengkap" placeholder="Admin Lotim" required>
                                     </div>
                                 </div>
                             </div>
@@ -78,14 +78,14 @@
                                 <div class="col-sm-6">
                                     <div class="form-group">
                                         <label>Alamat</label>
-                                        <input type="text" class="form-control" id="alamat" name="alamat" placeholder="Alamat" required>
+                                        <input type="text" class="form-control" id="alamat" name="alamat" placeholder="Alamat">
                                     </div>
                                 </div>
 
                                 <div class="col-sm-6">
                                     <div class="form-group">
                                         <label>Desa</label>
-                                        <input type="text" class="form-control" id="desa" name="desa" placeholder="Desa"required>
+                                        <input type="text" class="form-control" id="desa" name="desa" placeholder="Desa">
                                     </div>
                                 </div>
 
@@ -96,13 +96,25 @@
                                 <div class="col-sm-6">
                                     <div class="form-group">
                                         <label>Kecamatan</label>
-                                        <input type="text" class="form-control" id="kecamatan" name="kecamatan" placeholder="Kecamatan" required>
+                                        <input type="text" class="form-control" id="kecamatan" name="kecamatan" placeholder="Kecamatan">
                                     </div>
                                 </div>
                                 <div class="col-sm-6">
                                     <div class="form-group">
                                         <label>Kabupaten</label>
-                                        <input type="text" class="form-control" id="kabupaten" name="kabupaten" placeholder="Kabupaten">
+                                            <select class="form-control" name="Kabupaten" required>
+                                                <option value="Kabupaten Lombok Timur">Kabupaten Lombok Timur</option>
+                                                <option value="Kabupaten Lombok Tengah">Kabupaten Lombok Tengah</option>
+                                                <option value="Kabupaten Lombok Utara">Kabupaten Lombok Utara</option>
+                                                <option value="Kabupaten Lombok Barat">Kabupaten Lombok Barat</option>
+                                                <option value="Kabupaten Sumbawa">Kabupaten Sumbawa</option>
+                                                <option value="Kabupaten Sumbawa Barat">Kabupaten Sumbawa Barat</option>
+                                                <option value="Kabupaten Bima">Kabupaten Bima</option>
+                                                <option value="Kabupaten Dompu">Kabupaten Dompu</option>
+                                                <option value="Kota Bima">Kota Bima</option>
+                                                <option value="Kota Dompu">Kota Dompu</option>
+                                                <option value="Kota Mataram">Kota Mataram</option>
+                                            </select>
                                     </div>
                                 </div>
 
@@ -132,8 +144,16 @@
                                     <div class="form-group">
                                         <label>Level</label>
                                             <select class="form-control" name="level" required>
-                                                <option value="">Relawan</option>
-                                                <option value="admin">Admin</option>
+                                                <?php if ($_SESSION['level'] == 'superadmin') {
+                                                    ?>
+                                                    
+                                                        <option value="dinas">Dinas</option>
+                                                        <option value="admin">Admin</option>
+
+                                                    <?php
+
+                                                } 
+                                                ?>
                                                 <option value="relawan">Relawan</option>
                                             </select>
                                     </div>

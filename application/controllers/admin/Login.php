@@ -71,7 +71,7 @@ class Login extends CI_Controller{
             $this->session->set_userdata('bidang',$bidang);
             redirect('admin/dashboard');
          }
-            else if($xcadmin['level']=='relawan'){
+            else {
                 $this->session->set_userdata('akses','1');
                 $id=$xcadmin['kode_user'];
                 $kode_admin=$xcadmin['kode_admin'];

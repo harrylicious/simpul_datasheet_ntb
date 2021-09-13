@@ -113,7 +113,7 @@ class M_usaha extends CI_Model{
         if ($komoditas != "SEMUA") { 
             $this->db->where($this->komoditas, urldecode($komoditas));
         }
-        return $this->db->get($this->view_perkomoditas)->result(); 
+        return $this->db->get($this->view_perkomoditas)->result();   
 
     }
 

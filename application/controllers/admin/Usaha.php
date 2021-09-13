@@ -35,7 +35,7 @@ class Usaha extends CI_Controller{
 				$x['data'] = $this->m_usaha->get_all();  
 			}
 			else if ($this->session->userdata('level') == "dinas") {
-				$x['data'] = $this->m_usaha->get_all_perkomoditas("SEMUA");  
+				$x['data'] = $this->m_usaha->get_data_perkomoditas("SEMUA");  
 			}
 			else if ($this->session->userdata('level') == "admin") {
 				$x['data'] = $this->m_usaha->get_all_data_usaha_perkabupaten($kabupaten)->result();  

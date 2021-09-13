@@ -18,7 +18,7 @@ class User extends CI_Controller{
 		else {
 			$x['data'] = $this->m_user->get_detail_by_admin($kode_admin)->result();  
 		}
-		$this->load->view('admin/v_user', $x);
+		$this->load->view('admin/v_user', $x); 
 	}
 
 	function ubah_password(){ 
@@ -86,6 +86,18 @@ class User extends CI_Controller{
     function update_data($id){
 
 		$kode_admin = $this->session->userdata('username'); 
+
+		$kode_user=$this->input->post('kode_user');
+		$username=$this->input->post('username'); 
+		$email=$this->input->post('email');
+		$telpon=$this->input->post('telpon');
+		$nama_lengkap=$this->input->post('nama_lengkap');
+		$alamat=$this->input->post('alamat');
+		$desa=$this->input->post('desa');
+		$kecamatan=$this->input->post('kecamatan');
+		$kabupaten=$this->input->post('kabupaten');
+		$bidang=$this->input->post('bidang');
+		$level=$this->input->post('level');
 		$password=MD5($this->input->post('password'));
 		//$level=$this->input->post('xlevel');
 	 
