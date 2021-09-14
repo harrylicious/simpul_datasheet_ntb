@@ -206,20 +206,10 @@
                     </div>
                     <div class="row">
                         
-                            <div class="col-sm-6">
+                        <div class="col-sm-6">
                                 <div class="form-group">
                                     <label>Komoditas</label>
-                                        <select class="form-control" name="komoditas" required>
-                                            <option value="">- PILIH -</option>
-                                            <?php
-                                            $no = 1;
-                                            foreach ($data_komoditas as $row) : 
-                                            ?>
-                                                <option value="<?= $row->komoditas; ?>"><?= $row->komoditas; ?></option>
-                                            <?php
-                                            endforeach;
-                                            ?>
-                                        </select>
+                                    <input type="text" class="form-control" id="komoditas" name="komoditas" placeholder="Komoditas"  required>
                                 </div>
                             </div>
                         <div class="col-sm-6">
@@ -331,7 +321,7 @@
                                 <input type="text" class="form-control" id="email" name="email" placeholder="Email">
                             </div>
                         </div>
-                    </div>
+                    </div> 
 
                     
                     <div class="row">
@@ -399,7 +389,7 @@
   <script src="<?php echo base_url().'assets/dist/js/app.min.js'?>"></script>
 
 </body>
-</html>
+</html> 
 
 
 

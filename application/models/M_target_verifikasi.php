@@ -3,6 +3,7 @@ class M_target_verifikasi extends CI_Model{
 
     public $tabel ="target_verifikasi";
     public $id = "id";
+    public $desa = "desa";
     public $kode_user = "kode_user";
     public $kode_admin = "kode_admin";
     public $wilayah = "wilayah";
@@ -51,6 +52,12 @@ class M_target_verifikasi extends CI_Model{
     }
 
     
+    function delete_target($id, $desa){
+        $this->db->where($this->kode_user,$id);
+        $this->db->where($this->desa,$desa);
+        $this->db->delete($this->tabel);
+    }
+
     function delete($id){
         $this->db->where($this->id,$id);
         $this->db->delete($this->tabel);

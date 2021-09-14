@@ -20,6 +20,7 @@ class Usaha extends CI_Controller{
 
 	function index(){  
 		$idadmin = $this->session->userdata('idadmin');
+		$username = $this->session->userdata('username');
 		$bidang=$this->session->userdata('bidang');
 		$wilayah = $this->session->userdata('wilayah');
 		$kabupaten = $this->session->userdata('kabupaten');
@@ -31,18 +32,7 @@ class Usaha extends CI_Controller{
 		
 		if($this->session->userdata('akses')=='1'){  
 			
-			if ($this->session->userdata('level') == "superadmin") {
-				$x['data'] = $this->m_usaha->get_all();  
-			}
-			else if ($this->session->userdata('level') == "dinas") {
-				$x['data'] = $this->m_usaha->get_data_perkomoditas("SEMUA");  
-			}
-			else if ($this->session->userdata('level') == "admin") {
-				$x['data'] = $this->m_usaha->get_all_data_usaha_perkabupaten($kabupaten)->result();  
-			}
-			else if ($this->session->userdata('level') == "relawan") {
-				$x['data']=$this->m_usaha->get_all_non_verified_kecamatan($cek['kecamatan']);  
-			}
+		
 
 			$x['total']=$this->m_usaha->get_total()->row_array();   
 			$x['total_semua']=$this->m_usaha->get_total()->row_array();  
@@ -63,8 +53,19 @@ class Usaha extends CI_Controller{
 			$x['berkas_perorangan'] = $this->m_usaha->get_data_perkomoditas("Berkas Perorangan", $wilayah); 
 			$x['dinilai_kembali'] = $this->m_usaha->get_data_perkomoditas("Dinilai Kembali", $wilayah); 
 			$x['permanen'] = $this->m_usaha->get_data_perkomoditas("Permanen", $wilayah); 
-			
-			$this->load->view('admin/v_usaha',$x);
+
+			if ($this->session->userdata('level') == "superadmin") {
+				$x['data'] = $this->m_usaha->get_all();  
+				$this->load->view('admin/v_usaha',$x);
+			}
+			else if ($this->session->userdata('level') == "admin") { 
+				$x['data'] = $this->m_usaha->get_all_data_usaha_perkode_admin($username)->result();  
+				$this->load->view('admin/v_usaha_admin',$x);
+			}
+			else if ($this->session->userdata('level') == "relawan") { 
+				$x['data']=$this->m_usaha->get_all_data_usaha_perkode_user($idadmin)->result();  
+				$this->load->view('admin/v_usaha',$x);
+			}
 		}else{
 			redirect('administrator');
 		}
@@ -77,7 +78,7 @@ class Usaha extends CI_Controller{
 		$bidang=$this->session->userdata('bidang');
 		$wilayah = $this->session->userdata('wilayah');
 
-		$level = $this->session->userdata('level');
+		$level = $this->session->userdata('level'); 
 
 		$cek = $this->m_usaha->get_target_verifikasi($idadmin)->row_array();  
 		
@@ -109,7 +110,7 @@ class Usaha extends CI_Controller{
 			$x['dinilai_kembali'] = $this->m_usaha->get_data_perkomoditas("Dinilai Kembali", $wilayah); 
 			$x['permanen'] = $this->m_usaha->get_data_perkomoditas("Permanen", $wilayah); 
 			
-			$this->load->view('admin/v_verifikasi_usaha',$x);
+			$this->load->view('admin/v_verifikasi_usaha',$x); 
 		}else{
 			redirect('administrator');
 		}
@@ -124,7 +125,7 @@ class Usaha extends CI_Controller{
 
 		$data = array(
 			'is_verified' => 1,
-			'id_relawan' => $idadmin
+			'id_user' => $idadmin
 		);
 
 		$terverifikasi = $this->m_usaha->terverifikasi($id, $data);
@@ -159,7 +160,7 @@ class Usaha extends CI_Controller{
 			$x['dinilai_kembali'] = $this->m_usaha->get_data_perkomoditas("Dinilai Kembali", $wilayah); 
 			$x['permanen'] = $this->m_usaha->get_data_perkomoditas("Permanen", $wilayah); 
 
-			redirect('admin/v_verifikasi_usaha/'.$desa);
+			$this->load->view('admin/v_verifikasi_usaha',$x); 
 			
 		}else{
 			redirect('administrator');
@@ -181,6 +182,26 @@ class Usaha extends CI_Controller{
 			$x['data_target_verifikasi']=$this->m_usaha->get_target_verifikasi($id)->result();
 			
 			$this->load->view('admin/v_target_verifikasi',$x);
+		}else{
+			redirect('administrator');
+		}
+	}
+
+	function lihat_data_by_relawan($id){  
+		$idadmin = $this->session->userdata('idadmin');
+		$bidang=$this->session->userdata('bidang');
+		$wilayah = $this->session->userdata('wilayah');
+
+		$level = $this->session->userdata('level');
+		
+		if($this->session->userdata('akses')=='1'){  
+			
+			
+			$x['data_profil'] = $this->m_user->get_detail($id)->row_array(); 
+			$x['data_sebaran_usaha']=$this->m_usaha->get_all_sebaran_usaha_lengkap_belum_terverifikasi()->result();
+			$x['data']=$this->m_usaha->get_all_data_usaha_perkode_user($id)->result();
+			
+			$this->load->view('admin/v_usaha_relawan',$x);
 		}else{
 			redirect('administrator');
 		}
@@ -263,7 +284,7 @@ class Usaha extends CI_Controller{
 			$x['data_target_verifikasi']=$this->m_usaha->get_target_verifikasi($idadmin)->result();  
 
 			
-			$x['data_komoditas'] = $this->m_usaha->get_data_komoditas(); 
+			$x['data_komoditas'] = $this->m_usaha->get_data_komoditas()->result();  
 			$x['data_sumber_modal'] = $this->m_usaha->get_data_sumber_modal()->result(); 
 			$x['data_status_kepemilikan'] = $this->m_usaha->get_data_status_kepemilikan()->result(); 
 			$x['data_sektor_usaha'] = $this->m_usaha->get_data_sektor_usaha()->result(); 
@@ -350,7 +371,8 @@ class Usaha extends CI_Controller{
 			'periode_tanam'=>$periode_tanam,
 			'telpon'=>$telpon,
 			'email'=>$email,
-			'website'=>$website
+			'website'=>$website,
+			'id_user'=>$_SESSION['idadmin']
 		);
 
 	
@@ -420,7 +442,8 @@ function update_data(){
 			'periode_tanam'=>$periode_tanam,
 			'telpon'=>$telpon,
 			'email'=>$email,
-			'website'=>$website
+			'website'=>$website,
+			'id_user'=>$_SESSION['idadmin']
 		);
 
 	$this->m_usaha->update($id, $data);
@@ -429,7 +452,7 @@ function update_data(){
 
 
 
-public function import_excel(){
+public function import_excel(){ 
 
 		$file_mimes = array('application/octet-stream', 'application/vnd.ms-excel', 'application/x-csv', 'text/x-csv', 
 		'text/csv','text/xls','text/xlsx', 'application/csv', 'application/excel', 'application/vnd.msexcel', 
@@ -482,7 +505,8 @@ public function import_excel(){
 						'luas_lahan'=>$rowData[$i][22],
 						'telpon'=>$rowData[$i][23],
 						'email'=>$rowData[$i][24],
-						'website'=>$rowData[$i][25]
+						'website'=>$rowData[$i][25],
+						'id_user'=>$_SESSION['idadmin']
 				    	);
 						$this->m_usaha->insert($data);
 				   

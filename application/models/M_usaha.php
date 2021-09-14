@@ -12,6 +12,7 @@ class M_usaha extends CI_Model{
     public $tabel_status_kepemilikan ="ket_status_kepemilikan";
     public $tabel_target_verifikasi ="target_verifikasi";
 
+    public $view_usaha_admin ="data_usaha_dan_admin";
     public $view_perkabupaten ="data_usaha_perkabupaten";
     public $view_perkomoditas ="data_usaha_perkomoditas";
     public $view_metode_pemasaran ="total_data_metode_pemasaran";
@@ -41,6 +42,7 @@ class M_usaha extends CI_Model{
     public $wilayah = "kabupaten";
     public $kabupaten = "kabupaten";
     public $komoditas = "komoditas";
+    public $kode_admin = "kode_admin";
     public $order ="DESC"; 
 
 
@@ -89,7 +91,7 @@ class M_usaha extends CI_Model{
 
     
     // get all
-    function get_all_non_verified_kecamatan($kecamatan){
+    function get_all_non_verified_kecamatan($kecamatan){ 
         $this->db->order_by($this->id,$this->order);
         $this->db->where("kecamatan", urldecode($kecamatan));
         $this->db->where("is_verified", 0); 
@@ -199,13 +201,31 @@ class M_usaha extends CI_Model{
         return $this->db->get($this->tabel); 
     }
 
-    
+     
     // get all
     function get_all_data_usaha_perkabupaten($wilayah){
         if ($wilayah != "SEMUA") {  
             $this->db->where($this->wilayah, urldecode($wilayah));
         }
         return $this->db->get($this->tabel); 
+
+    }
+
+     // get all
+     function get_all_data_usaha_perkode_admin($kode_admin){
+        if ($kode_admin != "SEMUA") {  
+            $this->db->where($this->kode_admin, urldecode($kode_admin));
+        }
+        return $this->db->get($this->view_usaha_admin); 
+
+    }
+
+      // get all
+      function get_all_data_usaha_perkode_user($kode_user){
+        if ($kode_user != "SEMUA") {  
+            $this->db->where('id_user', urldecode($kode_user));
+        }
+        return $this->db->get($this->view_usaha_admin); 
 
     }
 
@@ -282,7 +302,7 @@ class M_usaha extends CI_Model{
     }
 
     // get all
-    function get_data_komoditas(){
+    function get_data_komoditas(){ 
         return $this->db->get($this->tabel_komoditas); 
 
     }
@@ -443,7 +463,7 @@ class M_usaha extends CI_Model{
 
     //update data
     function terverifikasi($id, $data){
-        $this->db->where($this->id,$id);
+        $this->db->where($this->id,$id); 
         $this->db->update($this->tabel,$data);
 
     }

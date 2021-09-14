@@ -147,7 +147,6 @@
                                                 <?php if ($_SESSION['level'] == 'superadmin') {
                                                     ?>
                                                     
-                                                        <option value="dinas">Dinas</option>
                                                         <option value="admin">Admin</option>
 
                                                     <?php

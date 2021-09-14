@@ -189,6 +189,16 @@ class User extends CI_Controller{
 
 	}
 
+	function hapus_data_target($desa, $id_user) { 
+		
+
+
+		$this->m_target_verifikasi->delete_target($id_user, $desa);
+		echo $this->session->set_flashdata('msg','<div class="alert alert-success" role="alert"><button type="button" class="close" data-dismiss="alert"><span class="fa fa-close"></span></button> Berhasil.</div>');
+		redirect('admin/usaha/target_verifikasi/'.$id_user);
+
+	}
+
 	
 
 

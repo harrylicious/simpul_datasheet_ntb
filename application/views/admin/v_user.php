@@ -64,7 +64,7 @@ tfoot input {
                           <th>Username</th>
                           <th>Level</th>
                           <th>Tanggal Terdaftar</th>
-                          <th width="180px">Aksi</th>
+                          <th width="240px">Aksi</th>
                       </tr>
                   </thead>
                   
@@ -86,7 +86,7 @@ tfoot input {
                               <a href="<?= base_url('admin/user/edit/').$row->kode_user; ?>" class="btn btn-warning">Edit</a>
                               <?php if ($row->level == 'relawan') {
                               ?>
-                              
+                              <a href="<?= base_url('admin/usaha/lihat_data_by_relawan/').$row->kode_user; ?>" class="btn btn-default">Lihat Data</a>
                               <a href="<?= base_url('admin/usaha/target_verifikasi/').$row->kode_user; ?>" class="btn btn-info">Atur Target</a>
                               <?php
                               }

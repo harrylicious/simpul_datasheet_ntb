@@ -95,11 +95,11 @@ if (isset($ntb)) {
             </div>
             <?php
         }
-        else if ($_SESSION['level'] == "dinas") {
+        else if ($_SESSION['level'] == "admin") {
             ?>
 
             <div class="inner">
-                    <p>Selamat Datang <b> <?= $_SESSION['nama_lengkap']; ?></b>, Anda saat ini masuk sebagai <b><?= $_SESSION['level']; ?></b> di <b><?= $_SESSION['kabupaten']; ?></b>.</p>
+                    <p>Selamat Datang <b> <?= $_SESSION['username']; ?> (<?= $_SESSION['nama_lengkap']; ?>)</b>, Anda saat ini masuk sebagai <b><?= $_SESSION['level']; ?></b> di <b><?= $_SESSION['kabupaten']; ?></b>.</p>
                     <p>Total Data di <b><?= $_SESSION['kabupaten']; ?></b> adalah <b><?= $total_perkabupaten; ?> </b> dari <b><?= $semua; ?></b>
                 </div>
             <?php
@@ -133,7 +133,7 @@ if (isset($ntb)) {
 </div>
 
 <?php 
-    if ($_SESSION['level'] != "relawan") {
+    if ($_SESSION['level'] == "superadmin") {
         ?>
 <div class="row mt-4 mb-4">
     <a href="<?= base_url('admin/usaha'); ?>">

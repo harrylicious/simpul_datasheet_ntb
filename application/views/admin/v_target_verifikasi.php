@@ -187,7 +187,7 @@
                             <td><?= $row->kecamatan; ?></td>
                             <td><?= $row->kabupaten; ?></td>
                             <td>
-                                <a href="<?= base_url('admin/user/hapus_data_target/').$row->desa."/".$data_profil['kode_user']; ?>" class="btn btn-info">Tambah Ke Target Verifikasi</a>
+                                <a href="<?= base_url('admin/user/hapus_data_target/').$row->desa."/".$data_profil['kode_user']; ?>" class="btn btn-danger">Hapus dari Target Verifikasi</a>
                             </td>
                         </tr>
 
@@ -236,28 +236,7 @@
 
 
 
-<!-- modal -->
-<div class="modal fade" id="modal-default">
-<div class="modal-dialog">
-    <div class="modal-content">
-        <div class="modal-header">
-            <button type="button" class="close" data-toggle="modal" data-target="#modal-default" aria-label="Close">
-                <span aria-hidden="true">&times;</span></button>
-            <h4 class="modal-title">Unggah Data</h4>
-        </div>
-        <form method="post" action="<?php echo base_url('admin/document/import_excel'); ?>" enctype="multipart/form-data">
-            <div class="modal-body">
-                <input type="file" class="btn" name="file" readonly>
-                NB: file harus bertype xls|csv
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Tutup</button>
-                <button type="submit" class="btn btn-success">Unggah</button>
-            </div>
-        </form>
-    </div> 
-</div>
-</div>
+
 
 
 <script>

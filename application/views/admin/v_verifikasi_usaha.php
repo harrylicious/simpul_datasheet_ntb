@@ -230,7 +230,7 @@ tfoot input {
                              <a href="<?= base_url('admin/usaha/edit/').$row->id; ?>" class="btn btn-warning">Edit</a>
                               <a href="<?= base_url('admin/usaha/delete_data_verifikasi/').$row->id; ?>" class="btn btn-danger">Hapus</a>
 
-                          </td>
+                          </td> 
                       </tr>
 
                       <?php

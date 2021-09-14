@@ -46,7 +46,7 @@ tfoot input {
                                   $teks = "Daftar Semua Usaha <b>".$_SESSION['alamat']."</b>";
                                 }
                                 else if ($_SESSION['level'] == "admin") {
-                                  $teks = "Daftar Usaha Berdasarkan Komoditas <b>".$_SESSION['lingkup']."</b>";
+                                  $teks = "Daftar Usaha Terentri di <b>".$_SESSION['nama_lengkap']."</b>";
                                 }
                                 else {
                                   $teks = "Daftar Semua Usaha Kecamatan <b>".$_SESSION['kecamatan']."</b>";

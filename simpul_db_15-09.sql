@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Sep 13, 2021 at 11:45 PM
+-- Generation Time: Sep 14, 2021 at 06:16 PM
 -- Server version: 10.4.17-MariaDB
 -- PHP Version: 8.0.2
 
@@ -84,6 +84,52 @@ CREATE TABLE `daftar_sebaran_usaha_lengkap_terverifikasi` (
 CREATE TABLE `data_sebaran_desa` (
 `desa` varchar(50)
 ,`total` bigint(21)
+);
+
+-- --------------------------------------------------------
+
+--
+-- Stand-in structure for view `data_usaha_dan_admin`
+-- (See below for the actual view)
+--
+CREATE TABLE `data_usaha_dan_admin` (
+`id` int(5)
+,`nama_usaha` text
+,`th_berdiri` int(4)
+,`no_izin` varchar(20)
+,`nama_pimpinan` varchar(50)
+,`nik` varchar(20)
+,`sektor_usaha` varchar(50)
+,`sub_sektor_usaha` varchar(50)
+,`alamat` text
+,`desa` varchar(50)
+,`kecamatan` varchar(50)
+,`kabupaten` varchar(50)
+,`komoditas` varchar(50)
+,`jml_karyawan` int(1)
+,`kapasitas_produksi` int(1)
+,`satuan_produksi` varchar(20)
+,`periode_produksi` varchar(10)
+,`status_kepemilikan` varchar(20)
+,`status_kepengurusan` varchar(30)
+,`status_kepemilikan_tempat` varchar(20)
+,`metode_pemasaran` varchar(10)
+,`sumber_modal` varchar(30)
+,`skala_pasar` varchar(30)
+,`luas_lahan` int(1)
+,`periode_tanam` int(1)
+,`telpon` varchar(20)
+,`email` varchar(50)
+,`website` varchar(20)
+,`is_verified` int(1)
+,`is_activated` int(1)
+,`created_at` datetime
+,`updated_at` datetime
+,`id_user` varchar(20)
+,`kode_admin` varchar(50)
+,`nama_lengkap` varchar(200)
+,`username` varchar(50)
+,`level` varchar(30)
 );
 
 -- --------------------------------------------------------
@@ -4006,10 +4052,8 @@ CREATE TABLE `target_verifikasi` (
 INSERT INTO `target_verifikasi` (`id`, `kode_user`, `desa`, `kecamatan`, `kabupaten`, `status`, `created_at`, `updated_at`) VALUES
 (1, 72, 'Labuhan Haji', 'Labuhan Haji', 'Lombok Timur', 0, '2021-06-02 22:30:39', '2021-06-02 22:30:39'),
 (2, 72, 'Kaleo', 'Lambu', 'Kabupaten Bima', 0, '2021-08-27 10:15:30', '2021-08-27 10:15:30'),
-(3, 72, 'Mesangguk', 'Gerung', 'Kabupaten Lombok Barat', 0, '2021-08-27 10:16:05', '2021-08-27 10:16:05'),
 (4, 72, 'Gerung', 'Gerung', 'Kabupaten Lombok Barat', 0, '2021-08-27 10:16:36', '2021-08-27 10:16:36'),
 (5, 10002, 'Kaleo', 'Lambu', 'Kabupaten Bima', 0, '2021-08-27 10:44:05', '2021-08-27 10:44:05'),
-(6, 10002, NULL, NULL, NULL, 0, '2021-08-27 10:44:09', '2021-08-27 10:44:09'),
 (7, 10002, 'Gerung', 'Gerung', 'Kabupaten Lombok Barat', 0, '2021-08-27 10:44:19', '2021-08-27 10:44:19'),
 (8, 10002, 'Mambalan', 'Gunung Sari', 'Kabupaten Lombok Barat', 0, '2021-08-27 10:44:27', '2021-08-27 10:44:27'),
 (9, 10003, 'Mesangguk', 'Gerung', 'Kabupaten Lombok Barat', 0, '2021-08-27 11:11:35', '2021-08-27 11:11:35');
@@ -4106,14 +4150,14 @@ CREATE TABLE `usaha` (
   `is_activated` int(1) DEFAULT 0,
   `created_at` datetime DEFAULT current_timestamp(),
   `updated_at` datetime DEFAULT current_timestamp() ON UPDATE current_timestamp(),
-  `id_relawan` varchar(20) DEFAULT NULL
+  `id_user` varchar(20) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `usaha`
 --
 
-INSERT INTO `usaha` (`id`, `nama_usaha`, `th_berdiri`, `no_izin`, `nama_pimpinan`, `nik`, `sektor_usaha`, `sub_sektor_usaha`, `alamat`, `desa`, `kecamatan`, `kabupaten`, `komoditas`, `jml_karyawan`, `kapasitas_produksi`, `satuan_produksi`, `periode_produksi`, `status_kepemilikan`, `status_kepengurusan`, `status_kepemilikan_tempat`, `metode_pemasaran`, `sumber_modal`, `skala_pasar`, `luas_lahan`, `periode_tanam`, `telpon`, `email`, `website`, `is_verified`, `is_activated`, `created_at`, `updated_at`, `id_relawan`) VALUES
+INSERT INTO `usaha` (`id`, `nama_usaha`, `th_berdiri`, `no_izin`, `nama_pimpinan`, `nik`, `sektor_usaha`, `sub_sektor_usaha`, `alamat`, `desa`, `kecamatan`, `kabupaten`, `komoditas`, `jml_karyawan`, `kapasitas_produksi`, `satuan_produksi`, `periode_produksi`, `status_kepemilikan`, `status_kepengurusan`, `status_kepemilikan_tempat`, `metode_pemasaran`, `sumber_modal`, `skala_pasar`, `luas_lahan`, `periode_tanam`, `telpon`, `email`, `website`, `is_verified`, `is_activated`, `created_at`, `updated_at`, `id_user`) VALUES
 (5, 'Perorangan (Sukardi)', 2018, '11111111111', '-', '0', 'Perikanan', 'Pertanian, Kehutanan, dan Perikanan', 'Kec. Tarano Kab. Sumbawa', 'Labuhan Aji', 'Tarano', 'Kabupaten Sumbawa', 'Perikanan', NULL, 100, NULL, 'Bulan', NULL, NULL, NULL, 'ONLINE', 'Koperasi', 'Nasional', 1000, 3, '0', '0', '', 0, 0, '2021-05-29 22:35:03', '2021-08-22 22:51:01', '6'),
 (6, 'Perorangan (Lalu Kertajaya)', 2018, '', '', '0', 'Perikanan', 'Pertanian, Kehutanan, dan Perikanan', 'Kec. Labangka Kab. Sumbawa', 'Labangka', 'Labangka', 'Kabupaten Sumbawa', 'Perikanan', NULL, 100, 'kg', 'Bulan', NULL, NULL, NULL, 'ONLINE', NULL, NULL, 1000, 3, '0', '0', NULL, 0, 0, '2021-05-29 22:35:03', '2021-08-22 22:51:01', '6'),
 (7, 'UD. Hasil Laut  (Rudy Hartono)', 2018, '', '', '0', 'Perikanan', 'Pertanian, Kehutanan, dan Perikanan', 'Kec. Tarano Kab. Sumbawa', 'Labuhan Jambu', '', 'Kabupaten Sumbawa', 'Perikanan', NULL, 100, 'kg', 'Bulan', NULL, NULL, NULL, 'ONLINE', NULL, NULL, 1000, 3, '0', '0', NULL, 0, 0, '2021-05-29 22:35:03', '2021-08-22 22:51:01', '6'),
@@ -4249,7 +4293,7 @@ INSERT INTO `usaha` (`id`, `nama_usaha`, `th_berdiri`, `no_izin`, `nama_pimpinan
 (859, 'ISMAIL', 0, '', '', '5203200205740001', 'Perikanan', 'Pertanian, Kehutanan, dan Perikanan', 'Dusun Ekas Desa Ekas Buana Kecamatn Jerowaru', 'Ekas Buana', 'Jerowaru', 'Kabupaten Lombok Timur', 'Lobster Air Laut ', NULL, 100, 'kg', 'Bulan', NULL, NULL, NULL, 'OFFLINE', NULL, NULL, 1000, 3, '0', '0', NULL, 0, 0, '2021-05-29 22:35:03', '2021-08-22 22:51:01', '6'),
 (860, 'KEDUN', 0, '', '', '5203200107820879', 'Perikanan', 'Pertanian, Kehutanan, dan Perikanan', 'Dusun Ekas Desa Ekas Buana Kecamatn Jerowaru', 'Ekas Buana', 'Jerowaru', 'Kabupaten Lombok Timur', 'Lobster Air Laut ', NULL, 100, 'kg', 'Bulan', NULL, NULL, NULL, 'OFFLINE', NULL, NULL, 1000, 3, '0', '0', NULL, 0, 0, '2021-05-29 22:35:03', '2021-08-22 22:51:01', '6'),
 (861, 'DIMAN', 0, '', '', '5203202105800002', 'Perikanan', 'Pertanian, Kehutanan, dan Perikanan', 'Dusun Ekas Desa Ekas Buana Kecamatn Jerowaru', 'Ekas Buana', 'Jerowaru', 'Kabupaten Lombok Timur', 'Lobster Air Laut ', NULL, 100, 'kg', 'Bulan', NULL, NULL, NULL, 'OFFLINE', NULL, NULL, 1000, 3, '0', '0', NULL, 0, 0, '2021-05-29 22:35:03', '2021-08-22 22:51:01', '6');
-INSERT INTO `usaha` (`id`, `nama_usaha`, `th_berdiri`, `no_izin`, `nama_pimpinan`, `nik`, `sektor_usaha`, `sub_sektor_usaha`, `alamat`, `desa`, `kecamatan`, `kabupaten`, `komoditas`, `jml_karyawan`, `kapasitas_produksi`, `satuan_produksi`, `periode_produksi`, `status_kepemilikan`, `status_kepengurusan`, `status_kepemilikan_tempat`, `metode_pemasaran`, `sumber_modal`, `skala_pasar`, `luas_lahan`, `periode_tanam`, `telpon`, `email`, `website`, `is_verified`, `is_activated`, `created_at`, `updated_at`, `id_relawan`) VALUES
+INSERT INTO `usaha` (`id`, `nama_usaha`, `th_berdiri`, `no_izin`, `nama_pimpinan`, `nik`, `sektor_usaha`, `sub_sektor_usaha`, `alamat`, `desa`, `kecamatan`, `kabupaten`, `komoditas`, `jml_karyawan`, `kapasitas_produksi`, `satuan_produksi`, `periode_produksi`, `status_kepemilikan`, `status_kepengurusan`, `status_kepemilikan_tempat`, `metode_pemasaran`, `sumber_modal`, `skala_pasar`, `luas_lahan`, `periode_tanam`, `telpon`, `email`, `website`, `is_verified`, `is_activated`, `created_at`, `updated_at`, `id_user`) VALUES
 (862, 'JUMANI', 0, '', '', '5203203112710137', 'Perikanan', 'Pertanian, Kehutanan, dan Perikanan', 'Dusun Ekas Desa Ekas Buana Kecamatn Jerowaru', 'Ekas Buana', 'Jerowaru', 'Kabupaten Lombok Timur', 'Lobster Air Laut ', NULL, 100, 'kg', 'Bulan', NULL, NULL, NULL, 'OFFLINE', NULL, NULL, 1000, 3, '0', '0', NULL, 0, 0, '2021-05-29 22:35:03', '2021-08-22 22:51:01', '6'),
 (863, 'MAHDI', 0, '', '', '5203203012800010', 'Perikanan', 'Pertanian, Kehutanan, dan Perikanan', 'Dusun Ekas Desa Ekas Buana Kecamatn Jerowaru', 'Ekas Buana', 'Jerowaru', 'Kabupaten Lombok Timur', 'Lobster Air Laut ', NULL, 100, 'kg', 'Bulan', NULL, NULL, NULL, 'OFFLINE', NULL, NULL, 1000, 3, '0', '0', NULL, 0, 0, '2021-05-29 22:35:03', '2021-08-22 22:51:01', '6'),
 (864, 'SAHDAN', 0, '', '', '5203200107840305', 'Perikanan', 'Pertanian, Kehutanan, dan Perikanan', 'Dusun Ekas Desa Ekas Buana Kecamatn Jerowaru', 'Ekas Buana', 'Jerowaru', 'Kabupaten Lombok Timur', 'Lobster Air Laut ', NULL, 100, 'kg', 'Bulan', NULL, NULL, NULL, 'OFFLINE', NULL, NULL, 1000, 3, '0', '0', NULL, 0, 0, '2021-05-29 22:35:03', '2021-08-22 22:51:01', '6'),
@@ -4371,7 +4415,7 @@ INSERT INTO `usaha` (`id`, `nama_usaha`, `th_berdiri`, `no_izin`, `nama_pimpinan
 (980, 'Nurimah', 0, '', '', '5203207112700323', 'Perikanan', 'Pertanian, Kehutanan, dan Perikanan', 'Ujung Betok, Desa Pemongkong, Kecamatan Jerowaru', 'Pemongkong', 'Jerowaru', 'Kabupaten Lombok Timur', 'Lobster', NULL, 100, 'kg', 'Bulan', NULL, NULL, NULL, 'OFFLINE', NULL, NULL, 1000, 3, '0', '0', NULL, 0, 0, '2021-05-29 22:35:03', '2021-08-22 22:51:01', '6'),
 (981, 'Inaq Munarep', 0, '', '', '5203205403690001', 'Perikanan', 'Pertanian, Kehutanan, dan Perikanan', 'Ujung Betok, Desa Pemongkong, Kecamatan Jerowaru', 'Pemongkong', 'Jerowaru', 'Kabupaten Lombok Timur', 'Lobster', NULL, 100, 'kg', 'Bulan', NULL, NULL, NULL, 'OFFLINE', NULL, NULL, 1000, 3, '0', '0', NULL, 0, 0, '2021-05-29 22:35:03', '2021-08-22 22:51:01', '6'),
 (982, 'Iq. Nursim', 0, '', '', ' 5203204410560001', 'Perikanan', 'Pertanian, Kehutanan, dan Perikanan', 'Ujung Betok, Desa Pemongkong, Kecamatan Jerowaru', 'Pemongkong', 'Jerowaru', 'Kabupaten Lombok Timur', 'Lobster', NULL, 100, 'kg', 'Bulan', NULL, NULL, NULL, 'OFFLINE', NULL, NULL, 1000, 3, '0', '0', NULL, 0, 0, '2021-05-29 22:35:03', '2021-08-22 22:51:01', '6'),
-(983, 'Ida Nurhayani', 0, '', '', ' 5203207112910236', 'Perikanan', 'Pertanian, Kehutanan, dan Perikanan', 'Ujung Betok, Desa Pemongkong, Kecamatan Jerowaru', 'Pemongkong', 'Jerowaru', 'Kabupaten Lombok Timur', 'Lobster', NULL, 100, 'kg', 'Bulan', NULL, NULL, NULL, 'OFFLINE', NULL, NULL, 1000, 3, '0', '0', NULL, 0, 0, '2021-05-29 22:35:03', '2021-08-22 22:51:01', '6'),
+(983, 'Ida Nurhayani', 0, '', '', ' 5203207112910236', 'Perikanan', 'Pertanian, Kehutanan, dan Perikanan', 'Ujung Betok, Desa Pemongkong, Kecamatan Jerowaru', 'Pemongkong', 'Jerowaru', 'Kabupaten Lombok Timur', 'Lobster', NULL, 100, 'kg', 'Bulan', NULL, NULL, NULL, 'OFFLINE', NULL, NULL, 1000, 3, '0', '0', NULL, 0, 0, '2021-05-29 22:35:03', '2021-09-14 23:45:57', '10002'),
 (984, 'Medan ', 0, '', '', ' 5203203112790314', 'Perikanan', 'Pertanian, Kehutanan, dan Perikanan', 'Ujung Betok, Desa Pemongkong, Kecamatan Jerowaru', 'Pemongkong', 'Jerowaru', 'Kabupaten Lombok Timur', 'Lobster', NULL, 100, 'kg', 'Bulan', NULL, NULL, NULL, 'OFFLINE', NULL, NULL, 1000, 3, '0', '0', NULL, 0, 0, '2021-05-29 22:35:03', '2021-08-22 22:51:01', '6'),
 (985, 'Saniah', 0, '', '', '5203207112750429', 'Perikanan', 'Pertanian, Kehutanan, dan Perikanan', 'Ujung Betok, Desa Pemongkong, Kecamatan Jerowaru', 'Pemongkong', 'Jerowaru', 'Kabupaten Lombok Timur', 'Lobster', NULL, 100, 'kg', 'Bulan', NULL, NULL, NULL, 'OFFLINE', NULL, NULL, 1000, 3, '0', '0', NULL, 0, 0, '2021-05-29 22:35:03', '2021-08-22 22:51:01', '6'),
 (986, 'Haeruman', 0, '', '', ' 5203201706840001', 'Perikanan', 'Pertanian, Kehutanan, dan Perikanan', 'Ujung Betok, Desa Pemongkong, Kecamatan Jerowaru', 'Pemongkong', 'Jerowaru', 'Kabupaten Lombok Timur', 'Lobster', NULL, 100, 'kg', 'Bulan', NULL, NULL, NULL, 'OFFLINE', NULL, NULL, 1000, 3, '0', '0', NULL, 0, 0, '2021-05-29 22:35:03', '2021-08-22 22:51:01', '6'),
@@ -4384,7 +4428,7 @@ INSERT INTO `usaha` (`id`, `nama_usaha`, `th_berdiri`, `no_izin`, `nama_pimpinan
 (993, 'Lalu Rahimi', 0, '', '', '5203203112700512', 'Perikanan', 'Pertanian, Kehutanan, dan Perikanan', 'Ujung Betok, Desa Pemongkong, Kecamatan Jerowaru', 'Pemongkong', 'Jerowaru', 'Kabupaten Lombok Timur', 'Lobster', NULL, 100, 'kg', 'Bulan', NULL, NULL, NULL, 'OFFLINE', NULL, NULL, 1000, 3, '0', '0', NULL, 0, 0, '2021-05-29 22:35:03', '2021-08-22 22:51:01', '6'),
 (994, 'Sahdi', 0, '', '', '5203203112800441', 'Perikanan', 'Pertanian, Kehutanan, dan Perikanan', 'Ujung Betok, Desa Pemongkong, Kecamatan Jerowaru', 'Pemongkong', 'Jerowaru', 'Kabupaten Lombok Timur', 'Lobster', NULL, 100, 'kg', 'Bulan', NULL, NULL, NULL, 'OFFLINE', NULL, NULL, 1000, 3, '0', '0', NULL, 0, 0, '2021-05-29 22:35:03', '2021-08-22 22:51:01', '6'),
 (995, 'Salman Alfarisi', 0, '', '', '5203200709840001', 'Perikanan', 'Pertanian, Kehutanan, dan Perikanan', 'Ujung Betok, Desa Pemongkong, Kecamatan Jerowaru', 'Pemongkong', 'Jerowaru', 'Kabupaten Lombok Timur', 'Lobster', NULL, 100, 'kg', 'Bulan', NULL, NULL, NULL, 'OFFLINE', NULL, NULL, 1000, 3, '0', '0', NULL, 0, 0, '2021-05-29 22:35:03', '2021-08-22 22:51:01', '6');
-INSERT INTO `usaha` (`id`, `nama_usaha`, `th_berdiri`, `no_izin`, `nama_pimpinan`, `nik`, `sektor_usaha`, `sub_sektor_usaha`, `alamat`, `desa`, `kecamatan`, `kabupaten`, `komoditas`, `jml_karyawan`, `kapasitas_produksi`, `satuan_produksi`, `periode_produksi`, `status_kepemilikan`, `status_kepengurusan`, `status_kepemilikan_tempat`, `metode_pemasaran`, `sumber_modal`, `skala_pasar`, `luas_lahan`, `periode_tanam`, `telpon`, `email`, `website`, `is_verified`, `is_activated`, `created_at`, `updated_at`, `id_relawan`) VALUES
+INSERT INTO `usaha` (`id`, `nama_usaha`, `th_berdiri`, `no_izin`, `nama_pimpinan`, `nik`, `sektor_usaha`, `sub_sektor_usaha`, `alamat`, `desa`, `kecamatan`, `kabupaten`, `komoditas`, `jml_karyawan`, `kapasitas_produksi`, `satuan_produksi`, `periode_produksi`, `status_kepemilikan`, `status_kepengurusan`, `status_kepemilikan_tempat`, `metode_pemasaran`, `sumber_modal`, `skala_pasar`, `luas_lahan`, `periode_tanam`, `telpon`, `email`, `website`, `is_verified`, `is_activated`, `created_at`, `updated_at`, `id_user`) VALUES
 (996, 'Saparwadi', 0, '', '', '5203200107800748', 'Perikanan', 'Pertanian, Kehutanan, dan Perikanan', 'Ujung Betok, Desa Pemongkong, Kecamatan Jerowaru', 'Pemongkong', 'Jerowaru', 'Kabupaten Lombok Timur', 'Lobster', NULL, 100, 'kg', 'Bulan', NULL, NULL, NULL, 'OFFLINE', NULL, NULL, 1000, 3, '0', '0', NULL, 0, 0, '2021-05-29 22:35:03', '2021-08-22 22:51:01', '6'),
 (997, 'Amaq Kartini', 0, '', '', '5203200407650001', 'Perikanan', 'Pertanian, Kehutanan, dan Perikanan', 'Ujung Betok, Desa Pemongkong, Kecamatan Jerowaru', 'Pemongkong', 'Jerowaru', 'Kabupaten Lombok Timur', 'Lobster', NULL, 100, 'kg', 'Bulan', NULL, NULL, NULL, 'OFFLINE', NULL, NULL, 1000, 3, '0', '0', NULL, 0, 0, '2021-05-29 22:35:03', '2021-08-22 22:51:01', '6'),
 (998, 'Bonggi', 0, '', '', '5203200101800003', 'Perikanan', 'Pertanian, Kehutanan, dan Perikanan', 'Ujung Betok, Desa Pemongkong, Kecamatan Jerowaru', 'Pemongkong', 'Jerowaru', 'Kabupaten Lombok Timur', 'Lobster', NULL, 100, 'kg', 'Bulan', NULL, NULL, NULL, 'OFFLINE', NULL, NULL, 1000, 3, '0', '0', NULL, 0, 0, '2021-05-29 22:35:03', '2021-08-22 22:51:01', '6'),
@@ -4415,8 +4459,8 @@ INSERT INTO `usaha` (`id`, `nama_usaha`, `th_berdiri`, `no_izin`, `nama_pimpinan
 (1023, 'Ardiman Fantoza', 0, '', '', '5203200205990003', 'Perikanan', 'Pertanian, Kehutanan, dan Perikanan', 'Dusun Telong-elong Desa Jerowaru', 'Telong-elong', 'Jerowaru', 'Kabupaten Lombok Timur', 'Lobster', NULL, 100, 'kg', 'Bulan', NULL, NULL, NULL, 'OFFLINE', NULL, NULL, 1000, 3, '0', '0', NULL, 0, 0, '2021-05-29 22:35:03', '2021-08-22 22:51:01', '6'),
 (1024, 'Sibawaihi', 0, '', '', '5203200107800616', 'Perikanan', 'Pertanian, Kehutanan, dan Perikanan', 'Dusun Telong-elong Desa Jerowaru', 'Telong-elong', 'Jerowaru', 'Kabupaten Lombok Timur', 'Lobster', NULL, 100, 'kg', 'Bulan', NULL, NULL, NULL, 'OFFLINE', NULL, NULL, 1000, 3, '0', '0', NULL, 0, 0, '2021-05-29 22:35:03', '2021-08-22 22:51:01', '6'),
 (1025, 'MARHAMAH', 0, '11111111111', 'Marhamah', '5203174107700890', 'Perikanan', 'Pertanian, Kehutanan, dan Perikanan', 'Labuhan Haji', 'Labuhan Haji', 'Labuhan Haji', 'Kabupaten Lombok Timur', 'Budidaya Air Tawar', NULL, 100, NULL, 'Bulan', NULL, NULL, NULL, 'OFFLINE', 'Koperasi', 'Nasional', 1000, 3, '-', 'marhamah@gmail.com', '-', 1, 0, '2021-05-29 22:35:03', '2021-08-27 11:00:41', '72'),
-(1026, 'LALU RIZKI ROYADHI', 2018, '', '', '5203172106900000', 'Perikanan', 'Pertanian, Kehutanan, dan Perikanan', 'Labuhan Haji', 'Labuhan Haji', 'Labuhan Haji', 'Kabupaten Lombok Timur', 'Budidaya Air Tawar', NULL, 100, NULL, 'Bulan', NULL, NULL, NULL, 'OFFLINE', 'Koperasi', 'Kabupaten', 1000, 3, '0', '0', '', 0, 0, '2021-05-29 22:35:03', '2021-08-22 22:51:01', '6'),
-(1027, 'BAMBANG IRAWAN ', 0, '', '', '5203171204690002', 'Perikanan', 'Pertanian, Kehutanan, dan Perikanan', 'Labuhan Haji', 'Labuhan Haji', 'Labuhan Haji', 'Kabupaten Lombok Timur', 'Budidaya Air Tawar', NULL, 100, 'kg', 'Bulan', NULL, NULL, NULL, 'OFFLINE', NULL, NULL, 1000, 3, '0', '0', NULL, 0, 0, '2021-05-29 22:35:03', '2021-08-22 22:51:01', '6'),
+(1026, 'LALU RIZKI ROYADHI', 2018, '', '', '5203172106900000', 'Perikanan', 'Pertanian, Kehutanan, dan Perikanan', 'Labuhan Haji', 'Labuhan Haji', 'Labuhan Haji', 'Kabupaten Lombok Timur', 'Budidaya Air Tawar', NULL, 100, NULL, 'Bulan', NULL, NULL, NULL, 'OFFLINE', 'Koperasi', 'Kabupaten', 1000, 3, '0', '0', '', 1, 0, '2021-05-29 22:35:03', '2021-09-15 00:06:50', '72'),
+(1027, 'BAMBANG IRAWAN ', 0, '', '', '5203171204690002', 'Perikanan', 'Pertanian, Kehutanan, dan Perikanan', 'Labuhan Haji', 'Labuhan Haji', 'Labuhan Haji', 'Kabupaten Lombok Timur', 'Budidaya Air Tawar', NULL, 100, 'kg', 'Bulan', NULL, NULL, NULL, 'OFFLINE', NULL, NULL, 1000, 3, '0', '0', NULL, 1, 0, '2021-05-29 22:35:03', '2021-09-15 00:05:08', '72'),
 (1028, 'H. Badaruddin', 0, '', '', '5203073112560213', 'Perikanan', 'Pertanian, Kehutanan, dan Perikanan', 'Kelayu Jorong', 'Kelayu Jorong', 'Selong', 'Kabupaten Lombok Timur', 'Pembudidaya ikan', NULL, 100, 'kg', 'Bulan', NULL, NULL, NULL, 'OFFLINE', NULL, NULL, 1000, 3, '0', '0', NULL, 0, 0, '2021-05-29 22:35:03', '2021-08-22 22:51:01', '6'),
 (1029, 'Husnul Hadi', 0, '', '', '5203071511860003', 'Perikanan', 'Pertanian, Kehutanan, dan Perikanan', 'Kelayu Jorong', 'Kelayu Jorong', 'Selong', 'Kabupaten Lombok Timur', 'Pembudidaya ikan', NULL, 100, 'kg', 'Bulan', NULL, NULL, NULL, 'OFFLINE', NULL, NULL, 1000, 3, '0', '0', NULL, 0, 0, '2021-05-29 22:35:03', '2021-08-22 22:51:01', '6'),
 (1030, 'Sulton abidin', 0, '', '', '5203072806810008', 'Perikanan', 'Pertanian, Kehutanan, dan Perikanan', 'Kelayu Jorong', 'Kelayu Jorong', 'Selong', 'Kabupaten Lombok Timur', 'Pembudidaya ikan', NULL, 100, 'kg', 'Bulan', NULL, NULL, NULL, 'OFFLINE', NULL, NULL, 1000, 3, '0', '0', NULL, 0, 0, '2021-05-29 22:35:03', '2021-08-22 22:51:01', '6'),
@@ -4525,7 +4569,7 @@ INSERT INTO `usaha` (`id`, `nama_usaha`, `th_berdiri`, `no_izin`, `nama_pimpinan
 (1133, 'Sarimin', 0, '', '', '5203090908980003', 'Perikanan', 'Pertanian, Kehutanan, dan Perikanan', 'Kr. Ranjong Desa Lenek Desa Lenek Kec. Lenek', 'Lenek', 'Lenek', 'Kabupaten Lombok Timur', 'Nila, karper, lele, bawal', NULL, 100, 'kg', 'Bulan', NULL, NULL, NULL, 'OFFLINE', NULL, NULL, 1000, 3, '0', '0', NULL, 0, 0, '2021-05-29 22:35:03', '2021-08-22 22:51:01', '6'),
 (1134, 'Khusnul Hatimah', 0, '', '', '5203094107860846', 'Perikanan', 'Pertanian, Kehutanan, dan Perikanan', 'Kr. Tojang Desa Lenek Pesiraman Kec. Lenek', 'Lenek', 'Lenek', 'Kabupaten Lombok Timur', 'Nila, karper, lele, bawal', NULL, 100, 'kg', 'Bulan', NULL, NULL, NULL, 'OFFLINE', NULL, NULL, 1000, 3, '0', '0', NULL, 0, 0, '2021-05-29 22:35:03', '2021-08-22 22:51:01', '6'),
 (1135, 'Aq. Riki', 0, '', '', '520309120373456', 'Perikanan', 'Pertanian, Kehutanan, dan Perikanan', 'Kr.Tojang Daya Rt.004 Desa Lenek Pesiraman Kec. Lenek ', 'Lenek Pasiraman', 'Lenek', 'Kabupaten Lombok Timur', 'Nila, karper, lele, bawal', NULL, 100, 'kg', 'Bulan', NULL, NULL, NULL, 'OFFLINE', NULL, NULL, 1000, 3, '0', '0', NULL, 0, 0, '2021-05-29 22:35:03', '2021-08-22 22:51:01', '6');
-INSERT INTO `usaha` (`id`, `nama_usaha`, `th_berdiri`, `no_izin`, `nama_pimpinan`, `nik`, `sektor_usaha`, `sub_sektor_usaha`, `alamat`, `desa`, `kecamatan`, `kabupaten`, `komoditas`, `jml_karyawan`, `kapasitas_produksi`, `satuan_produksi`, `periode_produksi`, `status_kepemilikan`, `status_kepengurusan`, `status_kepemilikan_tempat`, `metode_pemasaran`, `sumber_modal`, `skala_pasar`, `luas_lahan`, `periode_tanam`, `telpon`, `email`, `website`, `is_verified`, `is_activated`, `created_at`, `updated_at`, `id_relawan`) VALUES
+INSERT INTO `usaha` (`id`, `nama_usaha`, `th_berdiri`, `no_izin`, `nama_pimpinan`, `nik`, `sektor_usaha`, `sub_sektor_usaha`, `alamat`, `desa`, `kecamatan`, `kabupaten`, `komoditas`, `jml_karyawan`, `kapasitas_produksi`, `satuan_produksi`, `periode_produksi`, `status_kepemilikan`, `status_kepengurusan`, `status_kepemilikan_tempat`, `metode_pemasaran`, `sumber_modal`, `skala_pasar`, `luas_lahan`, `periode_tanam`, `telpon`, `email`, `website`, `is_verified`, `is_activated`, `created_at`, `updated_at`, `id_user`) VALUES
 (1136, 'Nurman', 0, '', '', '5203092707720002', 'Perikanan', 'Pertanian, Kehutanan, dan Perikanan', 'Gubuk Tengak Rt/Rw -/- Desa Lenek Pesiraman Kec. Lenek', 'Lenek Pasiraman', 'Lenek', 'Kabupaten Lombok Timur', 'Nila, karper, lele, bawal', NULL, 100, 'kg', 'Bulan', NULL, NULL, NULL, 'OFFLINE', NULL, NULL, 1000, 3, '0', '0', NULL, 0, 0, '2021-05-29 22:35:03', '2021-08-22 22:51:01', '6'),
 (1137, 'Riki Sabandi', 0, '', '', '5203090107940480', 'Perikanan', 'Pertanian, Kehutanan, dan Perikanan', 'Kr.Tojang Daya Rt.004 Desa Lenek Pesiraman Kec. Lenek ', 'Lenek Pasiraman', 'Lenek', 'Kabupaten Lombok Timur', 'Nila, karper, lele, bawal', NULL, 100, 'kg', 'Bulan', NULL, NULL, NULL, 'OFFLINE', NULL, NULL, 1000, 3, '0', '0', NULL, 0, 0, '2021-05-29 22:35:03', '2021-08-22 22:51:01', '6'),
 (1138, 'Mustarif', 0, '', '', '5203091212770015', 'Perikanan', 'Pertanian, Kehutanan, dan Perikanan', 'Koloh Motong Rt/Rw004/004 Desa Lenek Kec. Lenek', 'Lenek', 'Lenek', 'Kabupaten Lombok Timur', 'Nila, karper, lele, bawal', NULL, 100, 'kg', 'Bulan', NULL, NULL, NULL, 'OFFLINE', NULL, NULL, 1000, 3, '0', '0', NULL, 0, 0, '2021-05-29 22:35:03', '2021-08-22 22:51:01', '6'),
@@ -4659,7 +4703,7 @@ INSERT INTO `usaha` (`id`, `nama_usaha`, `th_berdiri`, `no_izin`, `nama_pimpinan
 (1266, 'SAFARWADI', 0, '', '', '5203033112900139', 'Perikanan', 'Pertanian, Kehutanan, dan Perikanan', 'Dsn Kelolos Desa Embung Raja', 'Embung Raja', 'Terara', 'Kabupaten Lombok Timur', 'Nila, karper, lele, bawal', NULL, 100, 'kg', 'Bulan', NULL, NULL, NULL, 'OFFLINE', NULL, NULL, 1000, 3, '0', '0', NULL, 0, 0, '2021-05-29 22:35:03', '2021-08-22 22:51:01', '6'),
 (1267, 'RUNDAH', 0, '', '', '5203030505860000', 'Perikanan', 'Pertanian, Kehutanan, dan Perikanan', 'Terara', 'Terara', 'Terara', 'Kabupaten Lombok Timur', 'Pembudidaya ikan', NULL, 100, 'kg', 'Bulan', NULL, NULL, NULL, 'OFFLINE', NULL, NULL, 1000, 3, '0', '0', NULL, 0, 0, '2021-05-29 22:35:03', '2021-08-22 22:51:01', '6'),
 (1268, 'ROHANI', 0, '', '', '5203034101750000', 'Perikanan', 'Pertanian, Kehutanan, dan Perikanan', 'Terara', 'Terara', 'Terara', 'Kabupaten Lombok Timur', 'Pembudidaya ikan', NULL, 100, 'kg', 'Bulan', NULL, NULL, NULL, 'OFFLINE', NULL, NULL, 1000, 3, '0', '0', NULL, 0, 0, '2021-05-29 22:35:03', '2021-08-22 22:51:01', '6');
-INSERT INTO `usaha` (`id`, `nama_usaha`, `th_berdiri`, `no_izin`, `nama_pimpinan`, `nik`, `sektor_usaha`, `sub_sektor_usaha`, `alamat`, `desa`, `kecamatan`, `kabupaten`, `komoditas`, `jml_karyawan`, `kapasitas_produksi`, `satuan_produksi`, `periode_produksi`, `status_kepemilikan`, `status_kepengurusan`, `status_kepemilikan_tempat`, `metode_pemasaran`, `sumber_modal`, `skala_pasar`, `luas_lahan`, `periode_tanam`, `telpon`, `email`, `website`, `is_verified`, `is_activated`, `created_at`, `updated_at`, `id_relawan`) VALUES
+INSERT INTO `usaha` (`id`, `nama_usaha`, `th_berdiri`, `no_izin`, `nama_pimpinan`, `nik`, `sektor_usaha`, `sub_sektor_usaha`, `alamat`, `desa`, `kecamatan`, `kabupaten`, `komoditas`, `jml_karyawan`, `kapasitas_produksi`, `satuan_produksi`, `periode_produksi`, `status_kepemilikan`, `status_kepengurusan`, `status_kepemilikan_tempat`, `metode_pemasaran`, `sumber_modal`, `skala_pasar`, `luas_lahan`, `periode_tanam`, `telpon`, `email`, `website`, `is_verified`, `is_activated`, `created_at`, `updated_at`, `id_user`) VALUES
 (1269, 'AMAQ RUSTAN', 0, '', '', '5203033112560100', 'Perikanan', 'Pertanian, Kehutanan, dan Perikanan', 'Terara', 'Terara', 'Terara', 'Kabupaten Lombok Timur', 'Pembudidaya ikan', NULL, 100, 'kg', 'Bulan', NULL, NULL, NULL, 'OFFLINE', NULL, NULL, 1000, 3, '0', '0', NULL, 0, 0, '2021-05-29 22:35:03', '2021-08-22 22:51:01', '6'),
 (1270, 'FIHIRUDIN', 0, '', '', '5203030607850000', 'Perikanan', 'Pertanian, Kehutanan, dan Perikanan', 'Terara', 'Terara', 'Terara', 'Kabupaten Lombok Timur', 'Pembudidaya ikan', NULL, 100, 'kg', 'Bulan', NULL, NULL, NULL, 'OFFLINE', NULL, NULL, 1000, 3, '0', '0', NULL, 0, 0, '2021-05-29 22:35:03', '2021-08-22 22:51:01', '6'),
 (1271, 'H.ISMAIL', 0, '', '', '5203033112610050', 'Perikanan', 'Pertanian, Kehutanan, dan Perikanan', 'Terara', 'Terara', 'Terara', 'Kabupaten Lombok Timur', 'Pembudidaya ikan', NULL, 100, 'kg', 'Bulan', NULL, NULL, NULL, 'OFFLINE', NULL, NULL, 1000, 3, '0', '0', NULL, 0, 0, '2021-05-29 22:35:03', '2021-08-22 22:51:01', '6'),
@@ -4796,7 +4840,7 @@ INSERT INTO `usaha` (`id`, `nama_usaha`, `th_berdiri`, `no_izin`, `nama_pimpinan
 (1402, 'Satria Winata', 0, '', '', '5203050404830004', 'Perikanan', 'Pertanian, Kehutanan, dan Perikanan', 'Dusun Nibas Desa Masbagik Utara Baru Kec.Masbagik', 'Masbagik Utara', 'Masbagik', 'Kabupaten Lombok Timur', 'Nila, karper, lele, bawal', NULL, 100, 'kg', 'Bulan', NULL, NULL, NULL, 'OFFLINE', NULL, NULL, 1000, 3, '0', '0', NULL, 0, 0, '2021-05-29 22:35:03', '2021-08-22 22:51:01', '6'),
 (1403, 'Abdul Muis', 0, '', '', '5203050705830002', 'Perikanan', 'Pertanian, Kehutanan, dan Perikanan', 'Dusun Nibas Desa Masbagik Utara Baru Kec.Masbagik', 'Masbagik Utara', 'Masbagik', 'Kabupaten Lombok Timur', 'Nila, karper, lele, bawal', NULL, 100, 'kg', 'Bulan', NULL, NULL, NULL, 'OFFLINE', NULL, NULL, 1000, 3, '0', '0', NULL, 0, 0, '2021-05-29 22:35:03', '2021-08-22 22:51:01', '6'),
 (1404, 'Habiburrahman', 0, '', '', '5203050705830002', 'Perikanan', 'Pertanian, Kehutanan, dan Perikanan', 'Dusun Nibas Desa Masbagik Utara Baru Kec.Masbagik', 'Masbagik Utara', 'Masbagik', 'Kabupaten Lombok Timur', 'Nila, karper, lele, bawal', NULL, 100, 'kg', 'Bulan', NULL, NULL, NULL, 'OFFLINE', NULL, NULL, 1000, 3, '0', '0', NULL, 0, 0, '2021-05-29 22:35:03', '2021-08-22 22:51:01', '6');
-INSERT INTO `usaha` (`id`, `nama_usaha`, `th_berdiri`, `no_izin`, `nama_pimpinan`, `nik`, `sektor_usaha`, `sub_sektor_usaha`, `alamat`, `desa`, `kecamatan`, `kabupaten`, `komoditas`, `jml_karyawan`, `kapasitas_produksi`, `satuan_produksi`, `periode_produksi`, `status_kepemilikan`, `status_kepengurusan`, `status_kepemilikan_tempat`, `metode_pemasaran`, `sumber_modal`, `skala_pasar`, `luas_lahan`, `periode_tanam`, `telpon`, `email`, `website`, `is_verified`, `is_activated`, `created_at`, `updated_at`, `id_relawan`) VALUES
+INSERT INTO `usaha` (`id`, `nama_usaha`, `th_berdiri`, `no_izin`, `nama_pimpinan`, `nik`, `sektor_usaha`, `sub_sektor_usaha`, `alamat`, `desa`, `kecamatan`, `kabupaten`, `komoditas`, `jml_karyawan`, `kapasitas_produksi`, `satuan_produksi`, `periode_produksi`, `status_kepemilikan`, `status_kepengurusan`, `status_kepemilikan_tempat`, `metode_pemasaran`, `sumber_modal`, `skala_pasar`, `luas_lahan`, `periode_tanam`, `telpon`, `email`, `website`, `is_verified`, `is_activated`, `created_at`, `updated_at`, `id_user`) VALUES
 (1405, 'Mugni', 0, '', '', '5203052008900003', 'Perikanan', 'Pertanian, Kehutanan, dan Perikanan', 'Dusun Nibas Desa Masbagik Utara Baru Kec.Masbagik', 'Masbagik Utara', 'Masbagik', 'Kabupaten Lombok Timur', 'Nila, karper, lele, bawal', NULL, 100, 'kg', 'Bulan', NULL, NULL, NULL, 'OFFLINE', NULL, NULL, 1000, 3, '0', '0', NULL, 0, 0, '2021-05-29 22:35:03', '2021-08-22 22:51:01', '6'),
 (1406, 'Samsudin', 0, '', '', '5203053112500431', 'Perikanan', 'Pertanian, Kehutanan, dan Perikanan', 'Dusun Nibas Desa Masbagik Utara Baru Kec.Masbagik', 'Masbagik Utara', 'Masbagik', 'Kabupaten Lombok Timur', 'Nila, karper, lele, bawal', NULL, 100, 'kg', 'Bulan', NULL, NULL, NULL, 'OFFLINE', NULL, NULL, 1000, 3, '0', '0', NULL, 0, 0, '2021-05-29 22:35:03', '2021-08-22 22:51:01', '6'),
 (1407, 'Hadi Suryadi', 0, '', '', '5203051301830001', 'Perikanan', 'Pertanian, Kehutanan, dan Perikanan', 'Dusun Nibas Desa Masbagik Utara Baru Kec.Masbagik', 'Masbagik Utara', 'Masbagik', 'Kabupaten Lombok Timur', 'Nila, karper, lele, bawal', NULL, 100, 'kg', 'Bulan', NULL, NULL, NULL, 'OFFLINE', NULL, NULL, 1000, 3, '0', '0', NULL, 0, 0, '2021-05-29 22:35:03', '2021-08-22 22:51:01', '6'),
@@ -4933,7 +4977,7 @@ INSERT INTO `usaha` (`id`, `nama_usaha`, `th_berdiri`, `no_izin`, `nama_pimpinan
 (1538, 'FALAHUDIN', 0, '', '', '5202060107700495', 'Perikanan', 'Pertanian, Kehutanan, dan Perikanan', 'Dusun Ekas Desa Ekas Buana Kecamatn Jerowaru', 'Selak', 'Praya Timur', 'Kabupaten Lombok Tengah', 'Udang Vaname', NULL, 100, 'kg', 'Bulan', NULL, NULL, NULL, 'OFFLINE', NULL, NULL, 1000, 3, '0', '0', NULL, 0, 0, '2021-05-29 22:35:03', '2021-08-22 22:51:01', '6'),
 (1539, 'ZAENAL ABIDIN', 0, '', '', '520206020578000', 'Perikanan', 'Pertanian, Kehutanan, dan Perikanan', 'Dusun Ekas Desa Ekas Buana Kecamatn Jerowaru', 'Dusun semut', 'Praya Timur', 'Kabupaten Lombok Tengah', 'Udang Vaname', NULL, 100, 'kg', 'Bulan', NULL, NULL, NULL, 'OFFLINE', NULL, NULL, 1000, 3, '0', '0', NULL, 0, 0, '2021-05-29 22:35:03', '2021-08-22 22:51:01', '6'),
 (1540, 'BADIR', 0, '', '', '5202061906890002', 'Perikanan', 'Pertanian, Kehutanan, dan Perikanan', 'Dusun Ekas Desa Ekas Buana Kecamatn Jerowaru', 'Batu Bokah', 'Praya Timur', 'Kabupaten Lombok Tengah', 'Udang Vaname', NULL, 100, 'kg', 'Bulan', NULL, NULL, NULL, 'OFFLINE', NULL, NULL, 1000, 3, '0', '0', NULL, 0, 0, '2021-05-29 22:35:03', '2021-08-22 22:51:01', '6');
-INSERT INTO `usaha` (`id`, `nama_usaha`, `th_berdiri`, `no_izin`, `nama_pimpinan`, `nik`, `sektor_usaha`, `sub_sektor_usaha`, `alamat`, `desa`, `kecamatan`, `kabupaten`, `komoditas`, `jml_karyawan`, `kapasitas_produksi`, `satuan_produksi`, `periode_produksi`, `status_kepemilikan`, `status_kepengurusan`, `status_kepemilikan_tempat`, `metode_pemasaran`, `sumber_modal`, `skala_pasar`, `luas_lahan`, `periode_tanam`, `telpon`, `email`, `website`, `is_verified`, `is_activated`, `created_at`, `updated_at`, `id_relawan`) VALUES
+INSERT INTO `usaha` (`id`, `nama_usaha`, `th_berdiri`, `no_izin`, `nama_pimpinan`, `nik`, `sektor_usaha`, `sub_sektor_usaha`, `alamat`, `desa`, `kecamatan`, `kabupaten`, `komoditas`, `jml_karyawan`, `kapasitas_produksi`, `satuan_produksi`, `periode_produksi`, `status_kepemilikan`, `status_kepengurusan`, `status_kepemilikan_tempat`, `metode_pemasaran`, `sumber_modal`, `skala_pasar`, `luas_lahan`, `periode_tanam`, `telpon`, `email`, `website`, `is_verified`, `is_activated`, `created_at`, `updated_at`, `id_user`) VALUES
 (1541, 'EKA HARIAWAN', 0, '', '', '5202062504960003', 'Perikanan', 'Pertanian, Kehutanan, dan Perikanan', 'Dusun Ekas Desa Ekas Buana Kecamatn Jerowaru', 'Semoyong Lauk', 'Praya Timur', 'Kabupaten Lombok Tengah', 'Udang Vaname', NULL, 100, 'kg', 'Bulan', NULL, NULL, NULL, 'OFFLINE', NULL, NULL, 1000, 3, '0', '0', NULL, 0, 0, '2021-05-29 22:35:03', '2021-08-22 22:51:01', '6'),
 (1542, 'GAMPANG', 0, '', '', '5202062070394005', 'Perikanan', 'Pertanian, Kehutanan, dan Perikanan', 'Dusun Ekas Desa Ekas Buana Kecamatn Jerowaru', 'Batu Berungguk ', 'Praya Timur', 'Kabupaten Lombok Tengah', 'Udang Vaname', NULL, 100, 'kg', 'Bulan', NULL, NULL, NULL, 'OFFLINE', NULL, NULL, 1000, 3, '0', '0', NULL, 0, 0, '2021-05-29 22:35:03', '2021-08-22 22:51:01', '6'),
 (1543, 'SUCINACKSAMBANDI', 0, '', '', '5202062612740001', 'Perikanan', 'Pertanian, Kehutanan, dan Perikanan', 'Dusun Ekas Desa Ekas Buana Kecamatn Jerowaru', 'Batu Berungguk ', 'Praya Timur', 'Kabupaten Lombok Tengah', 'Udang Vaname', NULL, 100, 'kg', 'Bulan', NULL, NULL, NULL, 'OFFLINE', NULL, NULL, 1000, 3, '0', '0', NULL, 0, 0, '2021-05-29 22:35:03', '2021-08-22 22:51:01', '6'),
@@ -5077,7 +5121,7 @@ INSERT INTO `usaha` (`id`, `nama_usaha`, `th_berdiri`, `no_izin`, `nama_pimpinan
 (1681, 'Mahidin', 0, '', '', '5201030107760051', 'Perikanan', 'Pertanian, Kehutanan, dan Perikanan', 'Sembung', 'Sembung', 'Narmada', 'Kabupaten Lombok Barat', 'Budidaya Air Tawar', NULL, 100, 'kg', 'Bulan', NULL, NULL, NULL, 'OFFLINE', NULL, NULL, 1000, 3, '0', '0', NULL, 0, 0, '2021-05-29 22:35:03', '2021-08-22 22:51:01', '6'),
 (1682, 'Bahri', 0, '', '', '5201030107760037', 'Perikanan', 'Pertanian, Kehutanan, dan Perikanan', 'Sembung', 'Sembung', 'Narmada', 'Kabupaten Lombok Barat', 'Budidaya Air Tawar', NULL, 100, 'kg', 'Bulan', NULL, NULL, NULL, 'OFFLINE', NULL, NULL, 1000, 3, '0', '0', NULL, 0, 0, '2021-05-29 22:35:03', '2021-08-22 22:51:01', '6'),
 (1683, 'Ramli', 0, '', '', '781216269785', 'Perikanan', 'Pertanian, Kehutanan, dan Perikanan', 'Sembung', 'Sembung', 'Narmada', 'Kabupaten Lombok Barat', 'Budidaya Air Tawar', NULL, 100, 'kg', 'Bulan', NULL, NULL, NULL, 'OFFLINE', NULL, NULL, 1000, 3, '0', '0', NULL, 0, 0, '2021-05-29 22:35:03', '2021-08-22 22:51:01', '6');
-INSERT INTO `usaha` (`id`, `nama_usaha`, `th_berdiri`, `no_izin`, `nama_pimpinan`, `nik`, `sektor_usaha`, `sub_sektor_usaha`, `alamat`, `desa`, `kecamatan`, `kabupaten`, `komoditas`, `jml_karyawan`, `kapasitas_produksi`, `satuan_produksi`, `periode_produksi`, `status_kepemilikan`, `status_kepengurusan`, `status_kepemilikan_tempat`, `metode_pemasaran`, `sumber_modal`, `skala_pasar`, `luas_lahan`, `periode_tanam`, `telpon`, `email`, `website`, `is_verified`, `is_activated`, `created_at`, `updated_at`, `id_relawan`) VALUES
+INSERT INTO `usaha` (`id`, `nama_usaha`, `th_berdiri`, `no_izin`, `nama_pimpinan`, `nik`, `sektor_usaha`, `sub_sektor_usaha`, `alamat`, `desa`, `kecamatan`, `kabupaten`, `komoditas`, `jml_karyawan`, `kapasitas_produksi`, `satuan_produksi`, `periode_produksi`, `status_kepemilikan`, `status_kepengurusan`, `status_kepemilikan_tempat`, `metode_pemasaran`, `sumber_modal`, `skala_pasar`, `luas_lahan`, `periode_tanam`, `telpon`, `email`, `website`, `is_verified`, `is_activated`, `created_at`, `updated_at`, `id_user`) VALUES
 (1684, 'Hafisudin', 0, '', '', '5201033112780044', 'Perikanan', 'Pertanian, Kehutanan, dan Perikanan', 'Sembung', 'Sembung', 'Narmada', 'Kabupaten Lombok Barat', 'Budidaya Air Tawar', NULL, 100, 'kg', 'Bulan', NULL, NULL, NULL, 'OFFLINE', NULL, NULL, 1000, 3, '0', '0', NULL, 0, 0, '2021-05-29 22:35:03', '2021-08-22 22:51:01', '6'),
 (1685, 'Raden Wardan', 0, '', '', '5201032806590001', 'Perikanan', 'Pertanian, Kehutanan, dan Perikanan', 'Selat', 'Selat', 'Narmada', 'Kabupaten Lombok Barat', 'Budidaya Air Tawar', NULL, 100, 'kg', 'Bulan', NULL, NULL, NULL, 'OFFLINE', NULL, NULL, 1000, 3, '0', '0', NULL, 0, 0, '2021-05-29 22:35:03', '2021-08-22 22:51:01', '6'),
 (1686, 'Haerudin', 0, '', '', '5201032302780001', 'Perikanan', 'Pertanian, Kehutanan, dan Perikanan', 'Selat', 'Selat', 'Narmada', 'Kabupaten Lombok Barat', 'Budidaya Air Tawar', NULL, 100, 'kg', 'Bulan', NULL, NULL, NULL, 'OFFLINE', NULL, NULL, 1000, 3, '0', '0', NULL, 0, 0, '2021-05-29 22:35:03', '2021-08-22 22:51:01', '6'),
@@ -5226,7 +5270,7 @@ INSERT INTO `usaha` (`id`, `nama_usaha`, `th_berdiri`, `no_izin`, `nama_pimpinan
 (1829, 'Saepudin Zohri', 0, '', '', '5201030107700187', 'Perikanan', 'Pertanian, Kehutanan, dan Perikanan', 'Badrain', 'Badrain', 'Narmada', 'Kabupaten Lombok Barat', 'Budidaya Air Tawar', NULL, 100, 'kg', 'Bulan', NULL, NULL, NULL, 'OFFLINE', NULL, NULL, 1000, 3, '0', '0', NULL, 0, 0, '2021-05-29 22:35:03', '2021-08-22 22:51:01', '6'),
 (1830, 'Sahdan ', 0, '', '', '5201030506860004', 'Perikanan', 'Pertanian, Kehutanan, dan Perikanan', 'Buwun Sejati', 'Buwun Sejati', 'Narmada', 'Kabupaten Lombok Barat', 'Budidaya Air Tawar', NULL, 100, 'kg', 'Bulan', NULL, NULL, NULL, 'OFFLINE', NULL, NULL, 1000, 3, '0', '0', NULL, 0, 0, '2021-05-29 22:35:03', '2021-08-22 22:51:01', '6'),
 (1831, 'Sahdiamin', 0, '', '', '5201033112780170', 'Perikanan', 'Pertanian, Kehutanan, dan Perikanan', 'Sesaot', 'Sesaot', 'Narmada', 'Kabupaten Lombok Barat', 'Budidaya Air Tawar', NULL, 100, 'kg', 'Bulan', NULL, NULL, NULL, 'OFFLINE', NULL, NULL, 1000, 3, '0', '0', NULL, 0, 0, '2021-05-29 22:35:03', '2021-08-22 22:51:01', '6');
-INSERT INTO `usaha` (`id`, `nama_usaha`, `th_berdiri`, `no_izin`, `nama_pimpinan`, `nik`, `sektor_usaha`, `sub_sektor_usaha`, `alamat`, `desa`, `kecamatan`, `kabupaten`, `komoditas`, `jml_karyawan`, `kapasitas_produksi`, `satuan_produksi`, `periode_produksi`, `status_kepemilikan`, `status_kepengurusan`, `status_kepemilikan_tempat`, `metode_pemasaran`, `sumber_modal`, `skala_pasar`, `luas_lahan`, `periode_tanam`, `telpon`, `email`, `website`, `is_verified`, `is_activated`, `created_at`, `updated_at`, `id_relawan`) VALUES
+INSERT INTO `usaha` (`id`, `nama_usaha`, `th_berdiri`, `no_izin`, `nama_pimpinan`, `nik`, `sektor_usaha`, `sub_sektor_usaha`, `alamat`, `desa`, `kecamatan`, `kabupaten`, `komoditas`, `jml_karyawan`, `kapasitas_produksi`, `satuan_produksi`, `periode_produksi`, `status_kepemilikan`, `status_kepengurusan`, `status_kepemilikan_tempat`, `metode_pemasaran`, `sumber_modal`, `skala_pasar`, `luas_lahan`, `periode_tanam`, `telpon`, `email`, `website`, `is_verified`, `is_activated`, `created_at`, `updated_at`, `id_user`) VALUES
 (1832, 'Supardi', 0, '', '', '5271040101830005', 'Perikanan', 'Pertanian, Kehutanan, dan Perikanan', 'Pagutan', 'Pagutan', 'Mataram', 'Kabupaten Lombok Barat', 'Budidaya Air Tawar', NULL, 100, 'kg', 'Bulan', NULL, NULL, NULL, 'OFFLINE', NULL, NULL, 1000, 3, '0', '0', NULL, 0, 0, '2021-05-29 22:35:03', '2021-08-22 22:51:01', '6'),
 (1833, 'Uji', 0, '', '', '5201033112770165', 'Perikanan', 'Pertanian, Kehutanan, dan Perikanan', 'Buwun Sejati', 'Buwun Sejati', 'Narmada', 'Kabupaten Lombok Barat', 'Budidaya Air Tawar', NULL, 100, 'kg', 'Bulan', NULL, NULL, NULL, 'OFFLINE', NULL, NULL, 1000, 3, '0', '0', NULL, 0, 0, '2021-05-29 22:35:03', '2021-08-22 22:51:01', '6'),
 (1834, 'Warti', 0, '', '', '5201032310760002', 'Perikanan', 'Pertanian, Kehutanan, dan Perikanan', 'Buwun Sejati', 'Buwun Sejati', 'Narmada', 'Kabupaten Lombok Barat', 'Budidaya Air Tawar', NULL, 100, 'kg', 'Bulan', NULL, NULL, NULL, 'OFFLINE', NULL, NULL, 1000, 3, '0', '0', NULL, 0, 0, '2021-05-29 22:35:03', '2021-08-22 22:51:01', '6'),
@@ -5373,7 +5417,7 @@ INSERT INTO `usaha` (`id`, `nama_usaha`, `th_berdiri`, `no_izin`, `nama_pimpinan
 (1975, 'Mursah', 0, '', '', '5201090107770031', 'Perikanan', 'Pertanian, Kehutanan, dan Perikanan', 'Desa Penimbung', 'Penimbung', 'Gunung Sari', 'Kabupaten Lombok Barat', 'Budidaya Air Tawar', NULL, 100, 'kg', 'Bulan', NULL, NULL, NULL, 'OFFLINE', NULL, NULL, 1000, 3, '0', '0', NULL, 0, 0, '2021-05-29 22:35:03', '2021-08-22 22:51:01', '6'),
 (1976, 'H Munasib', 0, '', '', '5201090107790330', 'Perikanan', 'Pertanian, Kehutanan, dan Perikanan', 'Desa Guntur Macan', 'Guntur Macan', 'Gunung Sari', 'Kabupaten Lombok Barat', 'Budidaya Air Tawar', NULL, 100, 'kg', 'Bulan', NULL, NULL, NULL, 'OFFLINE', NULL, NULL, 1000, 3, '0', '0', NULL, 0, 0, '2021-05-29 22:35:03', '2021-08-22 22:51:01', '6'),
 (1977, 'Muhamad Ridwan', 0, '', '', '5201090107880041', 'Perikanan', 'Pertanian, Kehutanan, dan Perikanan', 'Desa Guntur Macan', 'Guntur Macan', 'Gunung Sari', 'Kabupaten Lombok Barat', 'Budidaya Air Tawar', NULL, 100, 'kg', 'Bulan', NULL, NULL, NULL, 'OFFLINE', NULL, NULL, 1000, 3, '0', '0', NULL, 0, 0, '2021-05-29 22:35:03', '2021-08-22 22:51:01', '6');
-INSERT INTO `usaha` (`id`, `nama_usaha`, `th_berdiri`, `no_izin`, `nama_pimpinan`, `nik`, `sektor_usaha`, `sub_sektor_usaha`, `alamat`, `desa`, `kecamatan`, `kabupaten`, `komoditas`, `jml_karyawan`, `kapasitas_produksi`, `satuan_produksi`, `periode_produksi`, `status_kepemilikan`, `status_kepengurusan`, `status_kepemilikan_tempat`, `metode_pemasaran`, `sumber_modal`, `skala_pasar`, `luas_lahan`, `periode_tanam`, `telpon`, `email`, `website`, `is_verified`, `is_activated`, `created_at`, `updated_at`, `id_relawan`) VALUES
+INSERT INTO `usaha` (`id`, `nama_usaha`, `th_berdiri`, `no_izin`, `nama_pimpinan`, `nik`, `sektor_usaha`, `sub_sektor_usaha`, `alamat`, `desa`, `kecamatan`, `kabupaten`, `komoditas`, `jml_karyawan`, `kapasitas_produksi`, `satuan_produksi`, `periode_produksi`, `status_kepemilikan`, `status_kepengurusan`, `status_kepemilikan_tempat`, `metode_pemasaran`, `sumber_modal`, `skala_pasar`, `luas_lahan`, `periode_tanam`, `telpon`, `email`, `website`, `is_verified`, `is_activated`, `created_at`, `updated_at`, `id_user`) VALUES
 (1978, 'H Nasrudin', 0, '', '', '5201090107660113', 'Perikanan', 'Pertanian, Kehutanan, dan Perikanan', 'Desa Mambalan', 'Mambalan', 'Gunung Sari', 'Kabupaten Lombok Barat', 'Budidaya Air Tawar', NULL, 100, 'kg', 'Bulan', NULL, NULL, NULL, 'OFFLINE', NULL, NULL, 1000, 3, '0', '0', NULL, 0, 0, '2021-05-29 22:35:03', '2021-08-22 22:51:01', '6'),
 (1979, 'Saudi', 0, '', '', '5201091212770001', 'Perikanan', 'Pertanian, Kehutanan, dan Perikanan', 'Desa Jatisela', 'Jatisela', 'Gunung Sari', 'Kabupaten Lombok Barat', 'Budidaya Air Tawar', NULL, 100, 'kg', 'Bulan', NULL, NULL, NULL, 'OFFLINE', NULL, NULL, 1000, 3, '0', '0', NULL, 0, 0, '2021-05-29 22:35:03', '2021-08-22 22:51:01', '6'),
 (1980, 'Sudarman', 0, '', '', '5271010605830002', 'Perikanan', 'Pertanian, Kehutanan, dan Perikanan', 'Desa Sesela', 'Sesela', 'Gunung Sari', 'Kabupaten Lombok Barat', 'Budidaya Air Tawar', NULL, 100, 'kg', 'Bulan', NULL, NULL, NULL, 'OFFLINE', NULL, NULL, 1000, 3, '0', '0', NULL, 0, 0, '2021-05-29 22:35:03', '2021-08-22 22:51:01', '6'),
@@ -5508,7 +5552,8 @@ INSERT INTO `usaha` (`id`, `nama_usaha`, `th_berdiri`, `no_izin`, `nama_pimpinan
 (2185, 'Perorangan (Sukardi)', 2018, '11111111111', NULL, '0', 'Perikanan', 'Pertanian, Kehutanan, dan Perikanan', 'Kec. Tarano Kab. Sumbawa', 'Labuhan Aji', 'Tarano', 'Kabupaten Sumbawa', 'Perikanan', NULL, 100, NULL, 'Bulan', NULL, NULL, NULL, NULL, 'Pribadi', 'Kabupaten', 1000, 3, '0', '0', '', 0, 0, '2021-08-16 14:55:53', '2021-08-22 22:51:01', '6'),
 (2186, 'Perorangan (Sukardi)', 2018, '11111111111', NULL, '0', 'Perikanan', 'Pertanian, Kehutanan, dan Perikanan', 'Kec. Tarano Kab. Sumbawa', 'Labuhan Aji', 'Tarano', 'Kabupaten Sumbawa', 'Perikanan', NULL, 100, NULL, 'Bulan', NULL, NULL, NULL, NULL, 'Koperasi', 'Kecamatan', 1000, 3, '0', '0', '', 0, 0, '2021-08-16 14:58:43', '2021-08-22 22:51:01', '6'),
 (2191, 'TEST COBA 1', 2018, '12', 'Marhamah', '5203174107700890', 'Perikanan', 'Pertanian, Kehutanan, dan Perikanan', 'Labuhan Haji', 'Labuhan Haji', 'Labuhan Haji', 'Kabupaten Lombok Timur', 'Budidaya Air Tawar', NULL, 100, 'kg', 'Bulanan', 'Kelompok', NULL, 'Pribadi', 'OFFLINE', 'Pribadi', 'Nasional', 1000, NULL, '0877121212111', 'marhamah@gmail.com', 'marhamah.com', 1, 0, '2021-08-18 16:48:02', '2021-08-27 07:04:45', '72'),
-(2192, 'TEST COBA 2', 2018, '123', 'Test ', '5203172106900000', 'Perikanan', 'Pertanian, Kehutanan, dan Perikanan', 'Labuhan Haji', 'Labuhan Haji', 'Labuhan Haji', 'Kabupaten Lombok Timur', 'Budidaya Air Tawar', NULL, 100, 'kg', 'Bulanan', 'Kelompok', NULL, 'Kelompok', 'OFFLINE', 'Pribadi', 'Kabupaten', 1000, NULL, '085934', '-', 'test.com', 1, 0, '2021-08-18 16:48:02', '2021-08-27 07:04:56', '72');
+(2192, 'TEST COBA 2', 2018, '123', 'Test ', '5203172106900000', 'Perikanan', 'Pertanian, Kehutanan, dan Perikanan', 'Labuhan Haji', 'Labuhan Haji', 'Labuhan Haji', 'Kabupaten Lombok Timur', 'Budidaya Air Tawar', NULL, 100, 'kg', 'Bulanan', 'Kelompok', NULL, 'Kelompok', 'OFFLINE', 'Pribadi', 'Kabupaten', 1000, NULL, '085934', '-', 'test.com', 1, 0, '2021-08-18 16:48:02', '2021-08-27 07:04:56', '72'),
+(2194, 'Ini Cobaa Saja', 2001, '-', NULL, '-', 'PERTANIAN, KEHUTANAN DAN PERIKANAN', 'PERTANIAN GANDUM', '-', '-', '-', '-', 'Udang', 12, 120, NULL, '10', 'Pribadi', NULL, 'Pribadi', NULL, 'Pribadi', 'Kecamatan', 100, 100, '-', '-', '-', 0, 0, '2021-09-14 23:49:00', '2021-09-14 23:49:00', '72');
 
 -- --------------------------------------------------------
 
@@ -5539,17 +5584,17 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`kode_user`, `nama_lengkap`, `alamat`, `desa`, `kecamatan`, `kabupaten`, `email`, `telp`, `username`, `password`, `kode_admin`, `bidang`, `level`, `created_at`, `updated_at`) VALUES
+(0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'c9b3a00abecf2366d57bd989e043eec4', 'admin', NULL, NULL, '2021-08-27 11:11:27', '2021-09-13 23:21:52'),
 (58, 'Super Admin', 'NTB', '-', '-', '-', '-', '-', 'admin', '21232f297a57a5a743894a0e4a801fc3', 'Semua', '-', 'superadmin', '2021-05-02 14:01:15', '2021-08-16 11:13:06'),
-(66, 'Admin Lotim', '-', '-', '-', 'Kabupaten Lombok Timur', 'lotim@gmail.com', '-', 'lotim', '650cf97f6f285fcf1e0ae8bdd067390d', 'Kabupaten', '-', 'admin', '2021-05-31 23:37:36', '2021-09-13 17:16:22'),
-(67, 'Dinas Perindustrian', '-', '-', '-', 'Kota Mataram', 'disper@gmail.com', '-', 'disper', 'ac4acdf2dd40bfd80492a24739cb01c1', 'Provinsi', 'Perindustrian', 'dinas', '2021-05-31 23:37:36', '2021-09-13 17:24:57'),
-(68, 'Dinas Perdagangan', '-', '-', '-', 'Kota Mataram', 'disdag@gmail.com', '-', 'disdag', 'a84df236cac91dae592683174b877f66', 'Provinsi', 'Perdagangan', 'dinas', '2021-05-31 23:37:36', '2021-09-13 17:24:57'),
-(69, 'Dinas Koperasi dan UMKM', '-', '-', '-', 'Kota Mataram', 'diskop@gmail.com', '-', 'diskop', '86ebcf7f5ece4d2668535292012c30a0', 'Provinsi', 'Koperasi UMKM', 'dinas', '2021-05-31 23:37:36', '2021-09-13 17:24:57'),
-(70, 'Dinas Pangan dan Pertanian', '-', '-', '-', 'Kota Mataram', 'dispanper@gmail.com', '-', 'dispanper', 'dca6ef3af8875fd1ba543c7d6fad68b0', 'Provinsi', 'Pertanian', 'dinas', '2021-05-31 23:37:36', '2021-09-13 17:24:57'),
-(71, 'Dinas Kehutanan', '-', '-', '-', 'Kota Mataram', 'dishut@gmail.com', '-', 'dishut', 'b0fef69b6fafeb42ba093053fca5933d', 'Provinsi', 'Kehutanan', 'dinas', '2021-05-31 23:37:36', '2021-09-13 17:24:57'),
+(66, 'Admin Lotim', '-', '-', '-', 'Kabupaten Lombok Timur', 'lotim@gmail.com', '-', 'lotim', 'cff2372017ff38d74e37ca559a98c72b', 'Kabupaten', '-', 'admin', '2021-05-31 23:37:36', '2021-09-13 23:11:40'),
+(67, 'Dinas Perindustrian', '-', '-', '-', 'Kota Mataram', 'disper@gmail.com', '-', 'disper', 'ac4acdf2dd40bfd80492a24739cb01c1', 'Provinsi', 'Perindustrian', 'admin', '2021-05-31 23:37:36', '2021-09-14 14:09:22'),
+(68, 'Dinas Perdagangan', '-', '-', '-', 'Kota Mataram', 'disdag@gmail.com', '-', 'disdag', 'a84df236cac91dae592683174b877f66', 'Provinsi', 'Perdagangan', 'admin', '2021-05-31 23:37:36', '2021-09-14 14:09:22'),
+(69, 'Dinas Koperasi dan UMKM', '-', '-', '-', 'Kota Mataram', 'diskop@gmail.com', '-', 'diskop', '86ebcf7f5ece4d2668535292012c30a0', 'Provinsi', 'Koperasi UMKM', 'admin', '2021-05-31 23:37:36', '2021-09-14 14:09:22'),
+(70, 'Dinas Pangan dan Pertanian', '-', '-', '-', 'Kota Mataram', 'dispanper@gmail.com', '-', 'dispanper', 'dca6ef3af8875fd1ba543c7d6fad68b0', 'Provinsi', 'Pertanian', 'admin', '2021-05-31 23:37:36', '2021-09-14 14:09:22'),
+(71, 'Dinas Kehutanan', '-', '-', '-', 'Kota Mataram', 'dishut@gmail.com', '-', 'dishut', 'b0fef69b6fafeb42ba093053fca5933d', 'Provinsi', 'Kehutanan', 'admin', '2021-05-31 23:37:36', '2021-09-14 14:09:22'),
 (72, 'Harry Sunaryo, S.Kom', 'Timba Borok, RT. 11, RW. 03', 'Tanjung', 'Labuhan Haji', 'Kabupaten Lombok Timur', 'harrysunaryo03@gmail.com', '087851922063', 'relawan', '626c9488745bc8691a99fae8f227b6ce', 'disdag', NULL, 'relawan', '2021-05-31 23:37:36', '2021-08-22 15:01:26'),
 (10002, 'Test Saja', 'Selong', 'Test', 'Test', 'Test', 'haha@gmail.com', '0871213121', 'test', '098f6bcd4621d373cade4e832627b4f6', 'disdag', NULL, 'relawan', '2021-08-22 23:14:24', '2021-08-22 15:14:41'),
-(10003, 'Tim Disper', 'Tanjung', 'Tanjung', 'Labuhan Haji', 'Lombok TImur', 'tim@gmail.com', '091211111111', 'tim', 'ac4acdf2dd40bfd80492a24739cb01c1', 'disper', NULL, 'relawan', '2021-08-27 11:06:18', '2021-08-27 03:07:50'),
-(10005, 'anggota', 'Raranf', 'Rarang', 'Terara', 'Lombok TImur', 'anggota@gmail.com', '0871213121', 'anggota', 'dfb9e85bc0da607ff76e0559c62537e8', 'disper', NULL, 'relawan', '2021-08-27 11:11:27', '2021-08-27 03:11:27');
+(10003, 'Tim Disper', 'Tanjung', 'Tanjung', 'Labuhan Haji', 'Lombok TImur', 'tim@gmail.com', '091211111111', 'tim', 'ac4acdf2dd40bfd80492a24739cb01c1', 'disper', NULL, 'relawan', '2021-08-27 11:06:18', '2021-08-27 03:07:50');
 
 -- --------------------------------------------------------
 
@@ -5663,7 +5708,8 @@ INSERT INTO `visitors` (`pengunjung_id`, `pengunjung_tanggal`, `pengunjung_ip`, 
 (1021, '2021-09-07 12:22:26', '127.0.0.1', 'Firefox'),
 (1022, '2021-09-08 01:59:48', '127.0.0.1', 'Firefox'),
 (1023, '2021-09-13 13:46:55', '127.0.0.1', 'Firefox'),
-(1024, '2021-09-13 17:03:37', '127.0.0.1', 'Firefox');
+(1024, '2021-09-13 17:03:37', '127.0.0.1', 'Firefox'),
+(1025, '2021-09-14 16:00:14', '127.0.0.1', 'Firefox');
 
 -- --------------------------------------------------------
 
@@ -6980,6 +7026,15 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 -- --------------------------------------------------------
 
 --
+-- Structure for view `data_usaha_dan_admin`
+--
+DROP TABLE IF EXISTS `data_usaha_dan_admin`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `data_usaha_dan_admin`  AS SELECT `u`.`id` AS `id`, `u`.`nama_usaha` AS `nama_usaha`, `u`.`th_berdiri` AS `th_berdiri`, `u`.`no_izin` AS `no_izin`, `u`.`nama_pimpinan` AS `nama_pimpinan`, `u`.`nik` AS `nik`, `u`.`sektor_usaha` AS `sektor_usaha`, `u`.`sub_sektor_usaha` AS `sub_sektor_usaha`, `u`.`alamat` AS `alamat`, `u`.`desa` AS `desa`, `u`.`kecamatan` AS `kecamatan`, `u`.`kabupaten` AS `kabupaten`, `u`.`komoditas` AS `komoditas`, `u`.`jml_karyawan` AS `jml_karyawan`, `u`.`kapasitas_produksi` AS `kapasitas_produksi`, `u`.`satuan_produksi` AS `satuan_produksi`, `u`.`periode_produksi` AS `periode_produksi`, `u`.`status_kepemilikan` AS `status_kepemilikan`, `u`.`status_kepengurusan` AS `status_kepengurusan`, `u`.`status_kepemilikan_tempat` AS `status_kepemilikan_tempat`, `u`.`metode_pemasaran` AS `metode_pemasaran`, `u`.`sumber_modal` AS `sumber_modal`, `u`.`skala_pasar` AS `skala_pasar`, `u`.`luas_lahan` AS `luas_lahan`, `u`.`periode_tanam` AS `periode_tanam`, `u`.`telpon` AS `telpon`, `u`.`email` AS `email`, `u`.`website` AS `website`, `u`.`is_verified` AS `is_verified`, `u`.`is_activated` AS `is_activated`, `u`.`created_at` AS `created_at`, `u`.`updated_at` AS `updated_at`, `u`.`id_user` AS `id_user`, `us`.`kode_admin` AS `kode_admin`, `us`.`nama_lengkap` AS `nama_lengkap`, `us`.`username` AS `username`, `us`.`level` AS `level` FROM (`usaha` `u` join `users` `us`) WHERE `u`.`id_user` = `us`.`kode_user` ;
+
+-- --------------------------------------------------------
+
+--
 -- Structure for view `data_usaha_non_verified`
 --
 DROP TABLE IF EXISTS `data_usaha_non_verified`;
@@ -7396,25 +7451,25 @@ ALTER TABLE `relawan`
 -- AUTO_INCREMENT for table `target_verifikasi`
 --
 ALTER TABLE `target_verifikasi`
-  MODIFY `id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `usaha`
 --
 ALTER TABLE `usaha`
-  MODIFY `id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2194;
+  MODIFY `id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2195;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `kode_user` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10006;
+  MODIFY `kode_user` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10008;
 
 --
 -- AUTO_INCREMENT for table `visitors`
 --
 ALTER TABLE `visitors`
-  MODIFY `pengunjung_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1025;
+  MODIFY `pengunjung_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1026;
 
 --
 -- Constraints for dumped tables

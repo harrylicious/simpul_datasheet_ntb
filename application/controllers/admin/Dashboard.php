@@ -16,21 +16,20 @@ class Dashboard extends CI_Controller{
 		$wilayah = $this->session->userdata('wilayah');
 		$kabupaten = $this->session->userdata('kabupaten');
 		$nama = $this->session->userdata('nama_lengkap'); 
+		$username = $this->session->userdata('username');
 
 		
 		$idadmin = $this->session->userdata('idadmin');
 		$cek = $this->m_usaha->get_target_verifikasi($idadmin)->row_array();  
 
-		if($this->session->userdata('akses')=='1'){  
+		if($this->session->userdata('akses')=='1'){   
 			
 			if ($this->session->userdata('level') == "superadmin") {
 				$x['data'] = $this->m_usaha->get_all();  
 			}
-			else if ($this->session->userdata('level') == "dinas") {
-				$x['data'] = $this->m_usaha->get_all_perkomoditas("SEMUA");  
-			}
-			else if ($this->session->userdata('level') == "admin") {
-				$x['data'] = $this->m_usaha->get_all_data_usaha_perkabupaten($kabupaten)->result();  
+
+			else if ($this->session->userdata('level') == "admin") { 
+				$x['data'] = $this->m_usaha->get_all_data_usaha_perkode_admin($username)->result();  
 			}
 			else if ($this->session->userdata('level') == "relawan") {
 				$x['data']=$this->m_usaha->get_all_non_verified_kecamatan($cek['kecamatan']);  

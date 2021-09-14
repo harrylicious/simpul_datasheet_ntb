@@ -91,12 +91,9 @@ error_reporting(0);
         </li>
         <?php
 
-        if ($_SESSION['level'] != "relawan") {
+        if ($_SESSION['level'] == "superadmin") {
           ?>
-          
-
-        
-        <li>
+           <li>
           <a href="<?php echo base_url('admin/user').''?>">
             <i class="fa fa-user"></i> <span>Kelola Pengguna</span>
             <span class="pull-right-container">
@@ -104,10 +101,6 @@ error_reporting(0);
             </span>
           </a>
         </li>
-
-        
-        
-
           <?php
         }
 
@@ -116,6 +109,14 @@ error_reporting(0);
 
         if ($_SESSION['level'] == "admin") {
           ?>
+            <li>
+              <a href="<?php echo base_url('admin/user').''?>">
+                <i class="fa fa-user"></i> <span>Kelola Relawan</span>
+                <span class="pull-right-container">
+                  <small class="label pull-right"></small>
+                </span>
+              </a>
+            </li>
 
              <li>
               <a href="<?php echo base_url('admin/user').''?>">
