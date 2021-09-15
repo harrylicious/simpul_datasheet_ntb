@@ -218,7 +218,7 @@
                         <div class="col-sm-6">
                             <div class="form-group">
                                 <label>Jumlah Karyawan</label>
-                                <input type="number" class="form-control" id="lokasi_simpan" name="lokasi_simpan" placeholder="Lokasi Simpan" value="<?= $data['jml_karyawan']; ?>">
+                                <input type="number" class="form-control" id="jml_karyawan" name="jml_karyawan" placeholder="Jumlah Karyawan" value="<?= $data['jml_karyawan']; ?>">
                             </div>
                         </div>
                     </div>
@@ -244,8 +244,8 @@
                                 <label>Metode Pemasaran</label>
                                     <select class="form-control" name="metode_pemasaran" required>
                                         <option value="<?= $data['metode_pemasaran']; ?>"><?= $data['metode_pemasaran']; ?></option>
-                                        <option value="Online">Online</option>
-                                        <option value="Offline">Offline</option>
+                                        <option value="ONLINE">ONLINE</option>
+                                        <option value="OFFLINE">OFFLINE</option>
                                     </select>
                             </div>
                         </div>
@@ -262,7 +262,7 @@
                         <div class="col-sm-6">
                             <div class="form-group">
                                 <label>Skala Pemasaran</label>
-                                    <select class="form-control" name="skala_pasar" required>
+                                    <select class="form-control" name="skala_pasar">
                                         <option value="<?= $data['skala_pasar']; ?>"><?= $data['skala_pasar']; ?></option>
                                         <option value="Kecamatan">Kecamatan</option>
                                         <option value="Kabupaten">Kabupaten</option>
@@ -285,7 +285,7 @@
                         <div class="col-sm-6">
                             <div class="form-group">
                                 <label>Telpon</label>
-                                <input type="text" class="form-control" id="telpon" name="telpon" placeholder="Telpon" value="<?= $data['telpon']; ?>" required>
+                                <input type="text" class="form-control" id="telpon" name="telpon" placeholder="Telpon" value="<?= $data['telpon']; ?>">
                             </div>
                         </div>
                         <div class="col-sm-6">
@@ -307,7 +307,7 @@
                         <div class="col-sm-6">
                             <div class="form-group">
                                 <label>Sumber Modal</label>
-                                    <select class="form-control" name="sumber_modal" required>
+                                    <select class="form-control" name="sumber_modal">
                                         <option value="<?= $data['sumber_modal']; ?>"><?= $data['sumber_modal']; ?></option>
                                         <?php
                                         $no = 1;

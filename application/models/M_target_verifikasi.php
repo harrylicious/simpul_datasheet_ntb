@@ -54,7 +54,7 @@ class M_target_verifikasi extends CI_Model{
     
     function delete_target($id, $desa){
         $this->db->where($this->kode_user,$id);
-        $this->db->where($this->desa,$desa);
+        $this->db->where($this->desa,urldecode($desa));
         $this->db->delete($this->tabel);
     }
 

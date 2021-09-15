@@ -6,7 +6,7 @@ else {
   $semua = 0;
 }
 if (isset($nasional['total'])) {
-  $nasional = $nasional['total'];
+  $nasional = $nasional['total']; 
 }
 else {
   $nasional = 0;

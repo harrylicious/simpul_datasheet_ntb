@@ -25,7 +25,7 @@ class Usaha extends CI_Controller{
 		$grafik_jenis_usaha = $this->db->select('komoditas, COUNT(*) as total')->group_by('komoditas')->get_where('usaha', ['is_activated' => '0'])->result();
 		$x['label_grafik_jenis_usaha'] = [];
 		$x['value_grafik_jenis_usaha'] = [];
-
+ 
 		foreach($grafik_jenis_usaha as $gfu)
 		{
 			$x['label_grafik_jenis_usaha'][] = [

@@ -169,7 +169,7 @@ class Usaha extends CI_Controller{
 
 	function target_verifikasi($id){  
 		$idadmin = $this->session->userdata('idadmin');
-		$bidang=$this->session->userdata('bidang');
+		$bidang=$this->session->userdata('bidang'); 
 		$wilayah = $this->session->userdata('wilayah');
 
 		$level = $this->session->userdata('level');
@@ -365,6 +365,7 @@ class Usaha extends CI_Controller{
 			'status_kepemilikan'=>$status_kepemilikan,
 			//'status_kepengurusan'=>$status_kepengurusan,
 			'status_kepemilikan_tempat'=>$status_kepemilikan_tempat,
+			'metode_pemasaran'=>$metode_pemasaran,
 			'sumber_modal'=>$sumber_modal,
 			'skala_pasar'=>$skala_pasar,
 			'luas_lahan'=>$luas_lahan,
@@ -436,6 +437,7 @@ function update_data(){
 			'periode_produksi'=>$periode_produksi,
 			'status_kepemilikan'=>$status_kepemilikan,
 			'status_kepemilikan_tempat'=>$status_kepemilikan_tempat,
+			'metode_pemasaran'=>$metode_pemasaran,
 			'sumber_modal'=>$sumber_modal,
 			'skala_pasar'=>$skala_pasar,
 			'luas_lahan'=>$luas_lahan,

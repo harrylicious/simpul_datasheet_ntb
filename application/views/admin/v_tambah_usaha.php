@@ -270,8 +270,8 @@
                                 <label>Metode Pemasaran</label>
                                     <select class="form-control" name="metode_pemasaran" required>
                                         <option value="<?= $data['metode_pemasaran']; ?>"><?= $data['metode_pemasaran']; ?></option>
-                                        <option value="Online">Online</option>
-                                        <option value="Offline">Offline</option>
+                                        <option value="ONLINE">ONLINE</option>
+                                        <option value="OFFLINE">OFFLINE</option>
                                     </select>
                             </div>
                         </div>
@@ -312,7 +312,7 @@
                         <div class="col-sm-6">
                             <div class="form-group">
                                 <label>Telpon</label>
-                                <input type="text" class="form-control" id="telpon" name="telpon" placeholder="Telpon"  required>
+                                <input type="text" class="form-control" id="telpon" name="telpon" placeholder="Telpon" >
                             </div>
                         </div>
                         <div class="col-sm-6">

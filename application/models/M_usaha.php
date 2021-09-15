@@ -188,7 +188,7 @@ class M_usaha extends CI_Model{
 
     // get all
     function get_data_sebaran_usaha_lengkap_belum_terverifikasi_by_desa($desa){
-        $this->db->where("desa", $desa);
+        $this->db->where("desa", urldecode($desa)); 
         return $this->db->get($this->view_sebaran_usaha_lengkap_belum_verifikasi); 
     }
 
@@ -387,7 +387,7 @@ class M_usaha extends CI_Model{
 
    // get all
     function get_total(){
-        return $this->db->get("total_data_usaha"); 
+        return $this->db->get("total_data_usaha");  
     } 
 
     // get all

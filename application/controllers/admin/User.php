@@ -171,9 +171,9 @@ class User extends CI_Controller{
 		redirect('admin/usaha/target_verifikasi/'.$id);
 	}
 
-	function tambahkan_ke_target($desa, $id_user) { 
+	function tambahkan_ke_target($desa, $id_user) {  
 		
-		$cek = $this->m_usaha->get_data_sebaran_usaha_lengkap_belum_terverifikasi_by_desa($desa)->row_array(); 
+		$cek = $this->m_usaha->get_data_sebaran_usaha_lengkap_belum_terverifikasi_by_desa(urldecode($desa))->row_array(); 
 
 		$data = array (
 			'desa' => $cek['desa'],
@@ -193,7 +193,7 @@ class User extends CI_Controller{
 		
 
 
-		$this->m_target_verifikasi->delete_target($id_user, $desa);
+		$this->m_target_verifikasi->delete_target($id_user, urldecode($desa));
 		echo $this->session->set_flashdata('msg','<div class="alert alert-success" role="alert"><button type="button" class="close" data-dismiss="alert"><span class="fa fa-close"></span></button> Berhasil.</div>');
 		redirect('admin/usaha/target_verifikasi/'.$id_user);
 

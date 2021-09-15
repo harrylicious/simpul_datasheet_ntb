@@ -69,7 +69,15 @@
                 <li class="<?= $this->uri->segment(1) == 'komoditas' ? 'active' : '' ?>"><a href="<?php echo site_url('komoditas'); ?>">Komoditas</a></li>
                 <li class="<?= $this->uri->segment(1) == 'koperasi' ? 'active' : '' ?>"><a href="<?php echo site_url('regional'); ?>">Regional</a></li>
                 <li class="nav-item <?= $this->uri->segment(1) == 'datasheet' ? 'active' : '' ?>"><a href="<?php echo site_url('datausaha'); ?>">Datasheet</a></li>
-                <a href="<?php echo site_url('administrator'); ?>" class="get-started-btn scrollto nav-item <?= $this->uri->segment(1) == 'administrator' ? 'active' : '' ?>">Login</a>
+                <?php
+                if($this->session->userdata('akses')=='1'){   ?>
+                        <a href="<?php echo site_url('admin/login/logout'); ?>" class="get-started-btn scrollto nav-item <?= $this->uri->segment(1) == 'administrator' ? 'active' : '' ?>">Logout</a>
+
+                <?php } 
+                else {
+                    ?>
+                    <a href="<?php echo site_url('administrator'); ?>" class="get-started-btn scrollto nav-item <?= $this->uri->segment(1) == 'administrator' ? 'active' : '' ?>">Login</a>
+                    <?php } ?>
             </ul>
         </nav><!-- .nav-menu -->
 
