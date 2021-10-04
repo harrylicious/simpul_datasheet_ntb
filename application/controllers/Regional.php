@@ -29,7 +29,7 @@ class Regional extends CI_Controller{
 	
 
 	
-	function get_perwilayah($wilayah){
+	function get_perwilayah($wilayah){ 
 
 		$x['semua']=$this->m_usaha->get_total()->row_array();
 		$x['nasional'] = $this->m_usaha->get_all_perskala_pasar("Nasional")->row_array(); 
@@ -43,7 +43,7 @@ class Regional extends CI_Controller{
 		$x['data'] = $this->m_usaha->get_all_data_usaha_perkabupaten($wilayah)->result();  
 		
 
-		$this->load->view('depan/v_usaha_wilayah',$x); 
+		$this->load->view('depan/v_usaha_perkecamatan',$x);  
 	}
 
 	
