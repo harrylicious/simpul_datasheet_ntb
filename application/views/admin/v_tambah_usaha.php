@@ -14,6 +14,7 @@
 
 <body class="hold-transition skin-red sidebar-mini">
   <div class="wrapper">
+      
 
     <?php
     $this->load->view('admin/parsial/v_header');
@@ -31,6 +32,9 @@
     <div class="content-wrapper">
       <!-- Content Header (Page header) -->
       <section class="content-header">
+          
+    <div>
+    </div>
         <h1>
         Tambah Data Usaha
           <small></small>
@@ -42,11 +46,13 @@
     <section class="content">
 
 <div class="row">
+    
   <div class="col-md-3">
 
     <!-- Profile Image -->
     <div class="box box-primary">
       <div class="box-body box-profile">
+          
 
         
 
@@ -418,4 +424,11 @@
 
 
 
+<script>
+  window.setTimeout(function() {
+    $(".alert").fadeTo(500, 0).slideUp(500, function(){
+      $(this).remove(); 
+    });
+  }, 3000);
+</script>
 

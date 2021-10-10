@@ -57,5 +57,5 @@ $route['artikel/(:any)']='blog/detail/$1';
 $route['produk']='produk';
 $route['produk']='produk/index';
 $route['produk/(:any)']='produk/detail/$1';
-$route['404_override'] = '';
+$route['404_override'] = 'maintainance/ups';
 $route['translate_uri_dashes'] = FALSE;

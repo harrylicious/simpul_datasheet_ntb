@@ -378,6 +378,7 @@ class Usaha extends CI_Controller{
 
 	
 		$this->m_usaha->insert($data);
+		echo $this->session->set_flashdata('msg','<div class="alert alert-success" role="alert"><button type="button" class="close" data-dismiss="alert"><span class="fa fa-close"></span></button> Berhasil ditambahkan.</div>');
 		redirect('admin/usaha');
 }
 
@@ -448,6 +449,8 @@ function update_data(){
 			'id_user'=>$_SESSION['idadmin']
 		);
 
+	echo $this->session->set_flashdata('msg','<div class="alert alert-success" role="alert"><button type="button" class="close" data-dismiss="alert"><span class="fa fa-close"></span></button> Berhasil diubah..</div>');
+	
 	$this->m_usaha->update($id, $data);
 	redirect('admin/usaha');
 }

@@ -8,9 +8,13 @@
 </head>
 
 <body class="hold-transition login-page l-bg-red-dark">
-  <div class="login-box">
+  <div class="login-box">  
     <div>
-      <p><?php echo $this->session->flashdata('msg'); ?></p>
+    <p>
+        <?php 
+        echo $this->session->flashdata('msg'); 
+        ?>
+    </p> 
     </div>
     <!-- /.login-logo -->
     <div class="login-box-body p-3 mb-2 bg-gradient-danger">
